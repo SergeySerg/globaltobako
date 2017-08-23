@@ -200,10 +200,10 @@ class AdminArticlesController extends Controller {
 
 		//Decode base and attributes from categories DB
 		$fields = json_decode($admin_category->fields);
-
+//dd($fields);
 		//Decode attributes from categories DB
 		$attributes_fields = $fields->attributes;
-
+		//dd($attributes_fields);
 		return view('backend.articles.edit',[
 			'admin_article'=>$admin_article,
 			'admin_category' => $admin_category,
@@ -431,6 +431,7 @@ class AdminArticlesController extends Controller {
 	/* Сreate array for multilanguage (example- (ua|ru|en)) */
 	private function prepareAttributesData($all){
 		$langs = Lang::activelangs()->get();
+		//dd($langs);
 		$first_lang = $langs->first()['lang'];
 		//dd($first_lang);
 		foreach($all as $key => $value){

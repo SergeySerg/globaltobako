@@ -27,6 +27,7 @@ class Translate extends Model {
     public function getAttributeTranslate($key, $current_lang = null){
         $langs = Lang::all();
         $articleArray =  $this->toArray();
+       // dd($articleArray['attributes']);
         $attributes = json_decode($articleArray['attributes'], true);
         //dd($attributes);
         $pieces = explode("@|;", $attributes[$key]);

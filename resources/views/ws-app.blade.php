@@ -1,117 +1,76 @@
-<!DOCTYPE html>
-<html lang="{{ App::getLocale() }}">
-<head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN">
+<html lang="{{ App::getLocale() }}" dir="ltr"
+	  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	  xmlns:dc="http://purl.org/dc/terms/"
+	  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	  xmlns:og="http://ogp.me/ns#"
+	  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	  xmlns:sioc="http://rdfs.org/sioc/ns#"
+	  xmlns:sioct="http://rdfs.org/sioc/types#"
+	  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	  xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+<head  profile="http://www.w3.org/1999/xhtml/vocab">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="shortcut icon" href="http://globaltobako.com/sites/all/themes/global_tobacco/favicon.ico" type="image/vnd.microsoft.icon" />
+	<link rel="alternate" type="application/rss+xml" title="Global Tobacco RSS" href="http://globaltobako.com/pl/rss.xml" />
+	<title>Global Tobacco</title>
 	<title>	@if(isset($static_page)){{ $static_page->getTranslate('meta_title') }}  @elseif(isset($seo)) {{ $seo->getTranslate('meta_title') }} @endif</title>
 	<meta name="description" content="@if(isset($static_page)) {{ $static_page->getTranslate('meta_description') }} @elseif(isset($seo)){{ $seo->getTranslate('meta_description') }}@endif">
 	<meta name="keywords" content="@if(isset($static_page)) {{ $static_page->getTranslate('meta_keywords') }} @elseif(isset($seo)) {{ $seo->getTranslate('meta_keywords') }}@endif">
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
 	<link rel="shortcut icon" href="{{ asset('/img/favicon/favicon.ico') }}" type="image/x-icon">
 	<link rel="apple-touch-icon" href="{{ asset('/img/favicon/apple-touch-icon.png') }}">
 	<link rel="apple-touch-icon" sizes="72x72" href="{{ asset('img/favicon/apple-touch-icon-72x72.png') }}">
 	<link rel="apple-touch-icon" sizes="114x114" href="{{ asset('/img/favicon/apple-touch-icon-114x114.png') }}">
 
-	<link href="{{ asset('/css/frontend/stack-interface.css') }}" rel="stylesheet" type="text/css" media="all">
-	<link href="{{ asset('/css/frontend/socicon.css') }}" rel="stylesheet" type="text/css" media="all" />
-	<link href="{{ asset('/css/frontend/iconsmind.css') }}" rel="stylesheet" type="text/css" media="all" />
-	<link href="{{ asset('/css/frontend/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
-	<link href="{{ asset('/css/frontend/stack-interface.css') }}" rel="stylesheet" type="text/css" media="all" />
-	<link href="{{ asset('/css/frontend/theme-serpent.css') }}" rel="stylesheet" type="text/css" media="all" />
-	<link href="{{ asset('/css/frontend/font-awesome.min.css') }}" rel="stylesheet" type="text/css" media="all" />
-	<link href="{{ asset('/libs/owl-carousel/owl.carousel.css') }}" rel="stylesheet" type="text/css" media="all" />
-	<link href="{{ asset('/libs/owl-carousel/owl.theme.css') }}" rel="stylesheet" type="text/css" media="all" />
-	<link href="{{ asset('/libs/owl-carousel/owl.transitions.css') }}" rel="stylesheet" type="text/css" media="all" />
-	<link href="{{ asset('/libs/unitegallery/dist/css/unite-gallery.css') }}" rel="stylesheet">
-	<link href="{{ asset('/css/frontend/custom.css') }}?ver={{ $version }}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{{ asset('/css/frontend/style_one.min.css') }}" rel="stylesheet" type="text/css" media="all">
+	<link href="{{ asset('/css/frontend/style_two.min.css') }}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{{ asset('/css/frontend/style_three.min.css') }}" rel="stylesheet" type="text/css" media="all" />
+	<link type="text/css" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" media="all" />
+
+	<!-- HTML5 element support for IE6-8 -->
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
 	<link href="{{ asset('/css/plugins/sweetalert.css') }}" rel="stylesheet">
 
-	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
+<body class="html front not-logged-in one-sidebar sidebar-first page-node i18n-pl" >
 
-<body data-smooth-scroll-offset="77">
-	<div class="button-menu"><div class="menu-i icon"></div></div>
-	<div class="main-container">
-		<div class="menu-fix">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-4 col-md-5">
-						<a href="/{{ App::getLocale() }}"> <img class="menu-fix_logo" alt="logo" src="{{ asset('/img/frontend/logo.png') }}"></a>
-					</div>
-					<div class="col-xs-8 col-md-7 text-right">
-						<ul class="menu-horizontal text-right">
-							@include('frontend.menu')
-						</ul>
+<div id="skip-link">
+	<a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+</div>
 
-					</div>
-				</div>
-			</div>
+<div class="wrapper">
+
+	<header>
+		<h1 class="logo">
+			<a href="/pl" title="Home" rel="home"><span>Global</span><span> Tobacco</span></a>
+		</h1>
+		<div class="language-switcher">
+			<section id="block-locale-language" class="block block-locale clearfix">
+				<ul class="language-switcher-locale-url">
+					@foreach($langs as $lang)
+						<li class="{{ $lang->lang }}@if(App::getLocale() == $lang->lang)active @endif"><a href="{{str_replace(url(App::getLocale()), url($lang->lang), Request::url())}}">{{$lang->lang}}</a></li>
+					@endforeach
+				</ul>
+			</section>
 		</div>
+	</header>
 
-		@yield('header-content')
 
 		@yield('content')
 
-		<footer class="r-footer text-center-xs space--xs">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-2 col-md-2 col-lg-2">
-						<a href="/{{ App::getLocale() }}"><img class="logo r-logo" alt="logo" src="{{ asset('/img/frontend/logo_footer.png') }}"> </a>
-					</div>
-					<div class="col-xs-12 col-sm-5 col-md-4 col-lg-4 text-center-xs">
-						<ul class="menu-horizontal r-footer-menu text-left-md">
-							@if(isset($faq) AND count($faq) !== 0  AND  $categories_data['faq']->active == 1)
-								<li> <a class="r-menu-link"  href="/{{ App::getLocale() }}/faq">FAQ</a> </li>
-							@endif
-							<li> <a class="r-menu-link" data-scroll-id="prices" href="/{{ App::getLocale() }}#prices">{{ $categories_data['price']->getTranslate('title') }}</a> </li>
-							@if(isset($download) AND count($download) !== 0 AND $categories_data['download']->active == 1)
-								<li> <a class="r-menu-link" data-scroll-id="download" href="/{{ App::getLocale() }}#download">{{ $categories_data['download']->getTranslate('title') }}</a> </li>
-							@endif
-							@if(isset($contact) AND count($contact) !== 0 AND $categories_data['contact']->active == 1)
-								<li> <a class="r-menu-link" data-scroll-id="contacts" href="/{{ App::getLocale() }}#contacts">{{ $categories_data['contact']->getTranslate('title') }}</a> </li>
-							@endif
-						</ul>
-					</div>
-					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-						<ul class="menu-horizontal r-footer-menu text-right">
+	<footer>
+	</footer>
 
-							@if($categories_data['page']->active == 1)
 
-								@if(is_object($page) AND count($page) > 1)
-
-									@foreach($page as $page_item)
-										<li> <a class="r-menu-link"  href="/{{ App::getLocale() }}/{{ $categories_data['page']->link }}/{{ $page_item->id }}">{{ $page_item->getTranslate('title') }}</a> </li>
-									@endforeach
-
-								@elseif(count($page) == 1)
-										<li> <a class="r-menu-link"  href="/{{ App::getLocale() }}/{{ $categories_data['page']->link }}/{{$page->id}}">{{$page->getTranslate('title')}}</a> </li>
-								@endif
-
-							@endif
-
-						</ul>
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
-						<ul class="social-list list-inline list--hover text-right">
-
-							@foreach( $social as $social_item)
-								<li class="social-list-item"><a target="_blank" href="{{ $social_item->getAttributeTranslate('Ссылка на сеть') }}">{!! $social_item->getAttributeTranslate('Картинка соц. сети') !!}</a></li>
-							@endforeach
-							
-						</ul>
-					</div>
-					<div class="col-xs-12 col-sm-12">
-						<div class="copyright text-center">2017 xomobile.com</div>
-					</div>
-				</div>
-			</div>
-		</footer>
-
-	</div>
-	<div id="overlay"></div><!-- Пoдлoжкa -->
 
 {{--Файл переводов--}}
 	<script>
@@ -122,15 +81,16 @@
 	</script>
 {{--/Файл переводов--}}
 {{-- JS --}}
+
 	<script src="{{ asset('/js/plugins/sweetalert.min.js') }}"></script>
-	<script src="{{ asset('/js/frontend/common.js') }}?ver={{ $version }}"></script>
-	<script src="{{ asset('/js/frontend/parallax.js') }}"></script>
-	<script src="{{ asset('/js/frontend/countdown.min.js') }}"></script>
-	<script src="{{ asset('/js/frontend/smooth-scroll.min.js') }}"></script>
-	<script src="{{ asset('/libs/owl-carousel/owl.carousel.min.js') }}"></script>
-	<script src="{{ asset('/libs/unitegallery/dist/js/unitegallery.js') }}"></script>
-	<script src="{{ asset('/libs/unitegallery/dist/themes/tilesgrid/ug-theme-tilesgrid.js') }}"></script>
-	<script src="{{ asset('/js/frontend/scripts.js') }}?ver={{ $version }}"></script>
+	<script src="{{ asset('/js/frontend/jquery.js') }}"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+	<script src="{{ asset('/js/frontend/js_one.js') }}"></script>
+	<script src="{{ asset('/js/frontend/modernizr.js') }}"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYcm7rpoj87BtQPk8Q4TjddJQxcLx71mk"></script>
+	<script src="{{ asset('/js/frontend/jquery.parallax.js') }}"></script>
+	<script src="{{ asset('/js/frontend/config.js') }}"></script>
+
 {{-- /JS --}}
 </body>
 </html>

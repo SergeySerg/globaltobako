@@ -18,6 +18,7 @@ return [
 	'questions' => 'Ваши вопросы и предложения',
 	'our_contacts' => 'Наши контакты',
 	'send' => 'Отправить',
+	'more' => 'Больше о нас',
 
 	/* Script Contact*/
 	'success_send_contact' => 'Ваша заявка успешно отправлена!',

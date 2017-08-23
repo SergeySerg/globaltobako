@@ -17,6 +17,7 @@ return [
 	'questions' => 'Wasze pytania i propozycje',
 	'our_contacts' => 'Nasze kontakty',
 	'send' => 'Wysłać',
+	'more' => 'Więcej o nas',
 	/* Script Contact*/
 	'success_send_contact' => 'Twoja aplikacja została pomyślnie wysłana!',
 	'error_send_contact' => 'Podczas wysyłania aplikacji wystąpił błąd!',

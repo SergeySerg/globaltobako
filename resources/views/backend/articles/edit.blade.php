@@ -369,7 +369,7 @@
 
                                         @if(isset($attributes_fields))
                                             @foreach($attributes_fields as $key => $attribute)
-                                               @if($attribute->lang_active)
+                                               @if(isset($attribute) AND ($attribute->lang_active))
                                                     @if($attribute->type == 'input' )
                                                         <div class="control-group">
                                                             <label class="control-label" for="form-field-2">{{ $key }}</label>

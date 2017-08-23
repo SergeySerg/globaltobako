@@ -1,264 +1,252 @@
-$(function() {
+$(function(){
 
-/******change bg for mobile******/
-    if ( $(window).width() < 768){
-        $('#download .r-background-image-holder > img').attr("src","img/frontend/nav_bg_mobile.png");
-    }
-/******END change bg for mobile******/
+    var windowHeight = $( window ).height();
+    var windowWidth = $( window ).width();
+    if($('div').is('.content')){
+        var marTop = +($('.content').css('height').slice(0,-2));
+    };
+    var hoverTrigger = 1;
+    var projectId;
 
-/******zoom for slider******/
-    var sliderWidth = $('.owl-carousel').width();
-    sliderWidth = sliderWidth/3.257 - 40;
-    $('.slide-img-bg').each( function(){
-       $(this).height(sliderWidth); 
+/**********Center alignment img in mobile gallery**************/
+    function imgGallPos(){
+        $('.mob-gallery-item > img').each(function () {
+            var imgHeight = $(this).height();
+            var imgMar = (windowHeight - imgHeight)/2;
+            if(imgMar < 0) imgMar = 0;
+            console.info("windowHeight >>>" + windowHeight);
+            console.info("height img >>>" + imgHeight);
+            console.info("otstup >>>" + imgMar);
+            $('.mob-gallery-item').css({'height': windowHeight + 'px','width': windowWidth + 'px'});
+            $(this).css({'max-height': windowHeight + 'px','max-width': windowWidth + 'px'});
+            $(this).css({'margin-top': imgMar + 'px'});
+        });
+    };
+    $(window).load(function () {
+        imgGallPos();
     });
-/******END zoom for slider******/
-
-/******owl-corousel options******/
-    $(".owl-carousel").owlCarousel({
-        singleItem: true,
-        slideSpeed: 500,
-        loop: true,
-        autoPlay: 4000,
+    $(window).resize(function () {
+        windowHeight = $( window ).height();
+        windowWidth = $( window ).width();
+        imgGallPos();
     });
-/******END owl-corousel options******/
 
-/******Button burger ******/
+/**********END center alignment img in mobile gallery**************/
+
+/***********Trigger for scroll page or item in gallery by mouse wheel*************/
+/*
+    $('.r-carousel-wrap').hover(
+        function () {
+            hoverTrigger = 0;
+        },
+        function () {
+            hoverTrigger = 1;
+        }
+    );
+*/
+/***********END trigger for scroll page or item in gallery by mouse wheel*************/
+
+/***********Function for scroll page*************/
+    function scrollPage(pageOld,UpOrDown) {
+        if(UpOrDown == 'Up'){
+            var pageNum = +pageOld - 1;
+            if(pageNum == 1){
+                $('.arrow-up').css({'display': 'none'});
+            };
+            $('.arrow-down').css({'display':'block'});
+        };
+        if(UpOrDown == 'Down'){
+            var pageNum = +pageOld + 1;
+            if(pageNum == 4){
+                $('.arrow-down').css({'display': 'none'});
+            };
+            $('.arrow-up').css({'display':'block'});
+        };
+        $('[data-page-num]').removeClass('active');
+        $('body').find('[data-page-num=' + pageNum + ']').addClass('active');
+        $('.content-wrap').css({'margin-top' : - marTop * (pageNum - 1)});
+        $('.r-carousel-wrap').css({'opacity':0,'z-index':-1});
+        $('.project-item').show();
+    };
+/***********END function for scroll page*************/
+
+/***********Function for scroll-down gallery item*************/
+    function scrollGalleryDown() {
+        $('#project-carousel-' + projectId).find('.owl-next').trigger('click');
+        if($('#project-carousel-' + projectId + ' .owl-item:last-child').hasClass('active')){
+            $('.arrow-gallery-down').hide();
+        } else{
+            $('.arrow-gallery-down').show();
+        }
+        if($('#project-carousel-' + projectId + ' .owl-item:not(first-child)').hasClass('active')){
+            $('.arrow-gallery-up').show();
+        };
+    };
+/***********END function for scroll-down gallery item*************/
+
+/***********Function for scroll-up gallery item*************/
+    function scrollGalleryUp() {
+        $('#project-carousel-' + projectId).find('.owl-prev').trigger('click');
+        if($('#project-carousel-' + projectId + ' .owl-item:first-child').hasClass('active')){
+            $('.arrow-gallery-up').hide();
+        };
+        if($('#project-carousel-' + projectId + ' .owl-item:not(last-child)').hasClass('active')){
+            $('.arrow-gallery-down').show();
+        };
+    };
+/***********END function for scroll-up gallery item*************/
+
+/***********height screen*************/
+/*
+    $('.mob-block_about,.mob-block_contact').css({height : (windowHeight - $('.mob-header').css('height').slice(0,-2)) + 'px'});
+*/
+    $('.header, .footer').css({height : (windowHeight - marTop)/2 + 'px'});
+    $('.content').css({'top' : (windowHeight - marTop)/2 + 'px'});
+    $('.sidebar_right_wrap').css({'bottom' : (windowHeight - marTop)/2 + 'px'});
+/***********END height screen*************/
+
+/***********Navigation menu and click on logo*************/
+    $('.nav a, .logo').on("click", function (e) {
+        hoverTrigger = 1;
+        $('.project-item').show();
+        $('.r-carousel-wrap').css({'opacity':0,'z-index':-1});  // hide all gallery
+        $('.arrow').show();                                     //show arrow for page pagination
+        $('.arrow-gallery').hide();                             //hide arrow for img pagination in gallery
+        $('.arrow-gallery-up, .arrow-gallery-down').show();
+        $('[data-page-num]').removeClass('active');
+        var pageNum = $(this).attr('data-page-num');
+        if(pageNum == 1){
+            $('.arrow-up').css({'display': 'none'});
+        } else {
+            $('.arrow-up').css({'display': 'block'});
+        };
+        if(pageNum == 4){
+            $('.arrow-down').css({'display': 'none'});
+        } else {
+            $('.arrow-down').css({'display': 'block'});
+        };
+        $('body').find('[data-page-num=' + pageNum + ']').addClass('active');
+        $('.content-wrap').css({'margin-top' : - marTop * (pageNum - 1)});
+        e.preventDefault();
+    });
+/***********END navigation menu and click on logo*************/
+
+/***********Paggination page*************/
+    $('.arrow-up').on("click", function () {
+        var pageOld = $('body').find('.nav_item.active').attr('data-page-num');
+        scrollPage(pageOld, 'Up');
+    });
+
+    $('.arrow-down').on("click", function () {
+        var pageOld = $('body').find('.nav_item.active').attr('data-page-num');
+        scrollPage(pageOld, 'Down');
+    });
+
+    /***********Paggination by mouse wheel*************/
+    $('body').bind('mousewheel', function(e){
+        var pageOld = $('body').find('.nav_item.active').attr('data-page-num');
+        if(hoverTrigger == 1){  //scroll page
+            if((e.originalEvent.wheelDelta < 0) && pageOld <= 3) {
+                scrollPage(pageOld, 'Down');
+            };
+            if((e.originalEvent.wheelDelta > 0) && pageOld >= 2)  {
+                scrollPage(pageOld, 'Up');
+            };
+            return false;
+        } else {    //scroll gallery item
+            if((e.originalEvent.wheelDelta < 0) && pageOld <= 3) {
+                scrollGalleryDown();
+            };
+            if((e.originalEvent.wheelDelta > 0) && pageOld >= 2)  {
+                scrollGalleryUp();
+            };
+            return false;
+        }
+    });
+    /***********END paggination by mouse wheel*************/
+
+/***********END paggination*************/
+
+/***********Show gallery*************/
+    $('.project-item').on('click', function () {
+        hoverTrigger = 0;
+        $('.project-item').hide();
+        projectId = $(this).attr('data-id');
+        $('.content').find('#project-carousel-' + projectId).css({'opacity':1,'z-index':1});
+        $('.arrow-back, .arrow-gallery').show();
+        $('.arrow').hide();
+        if($('#project-carousel-' + projectId + ' .owl-item:first-child').hasClass('active')){
+            $('.arrow-gallery-up').hide();
+        };
+    });
+
+    $('.arrow-gallery-down').on('click', function () {
+        scrollGalleryDown();
+    });
+
+    $('.arrow-gallery-up').on('click', function () {
+        scrollGalleryUp();
+    });
+
+    $('.arrow-back').on('click', function () {
+        hoverTrigger = 1;
+        $('.project-item').show();
+        $('.r-carousel-wrap').css({'opacity':0,'z-index':-1});
+        $(this).hide();
+        $('.arrow').show();
+        $('.arrow-gallery').hide();
+        $('.arrow-gallery-up, .arrow-gallery-down').show();
+    });
+/***********END show gallery*************/
+
+/***********Show gallery on mobile*************/
+    $('.mob-project-item').on('click', function () {
+        projectId = $(this).attr('data-id');
+        $('body').find('#mob-project-carousel-' + projectId).toggleClass('active');
+    });
+
+    $('.mob-carousel-wrap .close').on('click', function () {
+        $(this).parent().toggleClass('active');
+    });
+/***********END show gallery on mobile*************/
+
+/***********Adaptive menu*************/
     $('.button-menu').click(function(){
         $(this).toggleClass('active');
-        $('.bar .menu-horizontal').toggleClass('active');
+        $('.mob-nav').toggleClass('active');
         $('.button-menu .icon').toggleClass('menu-i').toggleClass('close');
     });
-/******END Button burger ******/
-
-/**********languages**************/
-    var myLang = window.location.pathname.split('/');
-    var activeLang = $('.langs li a img[alt=' + myLang[1] + ']').attr('src');
-    $(".active-lang > img").attr('src',activeLang);
-    $('.langs').find('img[src=' + '\"' + activeLang + '\"' + ']').parent().parent().remove();
-    $('.active-lang').on("click", function () {
-        if($('.langs').hasClass('active')) {
-            $('.langs').slideUp().removeClass('active');
-        } else {
-            $('.langs').slideDown().addClass('active');
-        }
-    });
-/**********END languages**************/
+/***********END adaptive menu*************/
 
 /**********scrollTo**************/
-    $("a.r-menu-link").click(function() {
+/*
+    $(".mob-nav li a").click(function(e) {
         var scrollId = $(this).attr('data-scroll-id');
-        if (scrollId === 'prices') {
-            $('html, body').animate({
-                scrollTop: ($("#" + scrollId).offset().top - 85)
-            }, 1000);
-        } else{
-            $('html, body').animate({
-                scrollTop: ($("#" + scrollId).offset().top - 70)
-            }, 1000);
-        }
+        $('html, body').animate({
+            scrollTop: $("#" + scrollId).offset().top
+        }, 1000);
+        $('.button-menu').trigger('click');
+        e.preventDefault();
     });
+*/
 /**********END scrollTo**************/
 
-/**********faq dropdown**************/
-    $('.question').on("click", function () {
-        $(this).toggleClass('active');
-        $(this).find('i.fa').toggleClass('fa-angle-down').toggleClass('fa-angle-up');
-        if($(this).hasClass('active')){
-            $(this).parent().find('.answer').slideDown();
-        } else {
-            $(this).parent().find('.answer').slideUp();
-        }
-    });
-/**********END faq dropdown**************/
-
-/**********static-page gallery**************/
-    $('.flex-gallery').each(function(){
-        $(this).unitegallery({
-            gallery_theme: "tilesgrid",
-            gallery_width:"100%",              
-            grid_space_between_cols:15,
-            grid_space_between_rows:25,
-            grid_space_between_mobile:0,
-            tile_enable_border:false,
-            tile_enable_shadow:false,
-            grid_padding:0,
-            tile_width: 270,						
-            tile_height: 250,
-            grid_num_rows:10
+    if(windowHeight <= 900 ||  windowWidth <= 1200){
+        $('.nav img').each(function () {
+            var imgSrc = $(this).attr('src').slice(0,-4) + '_min.png';
+            $(this).attr('src', imgSrc);
         });
-    });
-/**********END static-page gallery**************/
-    
-/**********slider pop-up**************/
-    $('.show-popup-slide').click(function(event){
-        var slide_id = $(this).attr('data-slide-id');
-        $('#overlay').fadeIn(400,
-            function(){
-                $('[data-popup-id='+slide_id+']')
-                    .css('display', 'block')
-                    .animate({opacity: 1, top: '45%'}, 200);
-            });
-        $('#overlay').click( function(){
-            $('[data-popup-id='+slide_id+']')
-                .animate({opacity: 0, top: '45%'}, 200,
-                    function(){
-                        $(this).css('display', 'none');
-                        $('#overlay').fadeOut(400);
-                    }
-                );
-        });
-        $(document).keydown( function(e) {
-            if (e.keyCode === 27) {
-                $('[data-popup-id='+slide_id+']')
-                    .animate({opacity: 0, top: '45%'}, 200,
-                        function(){
-                            $(this).css('display', 'none');
-                            $('#overlay').fadeOut(400);
-                        }
-                    );
-                e.preventDefault();
-            }
-        });
-    });
-/**********END slider pop-up**************/
-
-/**********fixed menu**************/
-    $(window).scroll(function(){                             
-        if ( $(window).scrollTop() >= 150 ){                  
-            $('.menu-fix').css('display','block');     
-            $('.button-menu').css({'top':'25px', 'position':'fixed'}); 
-        } else {
-            $('.menu-fix').css('display','none');  
-            if( $(window).width() > 768) {
-                $('.button-menu').css({'top':'13px','position':'absolute'});       
-            } else {
-                $('.button-menu').css({'top':'55px','position':'absolute'});        
-            }
-        }
-    });
-/**********END sfixed menu**************/
-
-/**********call-back**************/
-    $('#submit-send').on('click', function(event){
-        $('#submit-send').attr('disabled', true);
-        var data = new FormData($('form#callback')[0]);
-        $.ajax({
-            url: '',
-            method: 'POST',
-            processData: false,
-            contentType: false,
-            data: data,
-            dataType : "json",
-            success: function(data){
-                if(data.success){
-                    swal(trans['base.success'], "", "success");
-                    jQuery("#callback").trigger("reset");
-                    $("#submit-send").attr('disabled', false);
-                }
-                else{
-                    swal(trans['base.error'], data.message, "error");
-                    $("#submit-send").attr('disabled', false);
-                }
-            },
-            error:function(data){
-                swal(trans['base.error']);
-                $("#submit-send").attr('disabled', false);
-            }
-
-        });
-        event.preventDefault();
-    });
-/**********END call-back**************/
-
-/**********send code country**************/
-    var tariffsCache = {};
-
-    $('#tariffing').on( "submit",function(event){
-        event.preventDefault();
-        return false;
-    });
-    var clearTariffingResult = function(){
-        $('#tariffing-operator').text('');
-        $('#tariffing-rate').text('');
     };
 
-    $('#insert_field').keypress(function(e){
-        var symbol = (e.which) ? e.which : e.keyCode;
-        if (symbol != 8 && symbol != 46 && symbol != 37 && symbol != 39 && symbol < 48 || symbol > 57)  return false;
+/***********Owl-carousel*************/
+    $('.owl-carousel').owlCarousel({
+        items:1,
+        singleItem: true,
+        nav: true,
+        navText: "",
+        animateOut: "fadeOut",
+        animateIn: "fadeIn"
     });
-
-    var currentPhoneQuery = '';
-
-    $('#insert_field').on('keyup', function(event){
-        var value = $(this).val();
-        if(value == '+'){
-            $(this).val('');
-        }else if((value[0] != '+') && (value.length > 0)){
-            $(this).val('+' + value);
-        }
-
-        if(value.length < 4){
-            clearTariffingResult();
-            return;
-        }
-
-        if(value in tariffsCache){
-            $('#error').hide();
-            $('#tariff-not-found').hide();
-            $('#tariffing-operator').text(tariffsCache[value].destination);
-            $('#tariffing-rate').text(tariffsCache[value].rate + ' \u20ac/min');
-            $('#tariffing-result').show();
-            return;
-        }
-
-        var data = {
-            code: value.replace('+', ''),
-            _token: $("#tariffing input[name='_token']").val()
-        };
-
-        currentPhoneQuery = data.code;
-
-        var url = $( "input[name$='url']" ).val();
-        $.ajax({
-            url: url + '?rand=' + Math.random(),
-            method: "POST",
-            data: data,
-            dataType : "json",
-            success: function(data){
-                if($('#insert_field').val() != '+' + currentPhoneQuery){
-                    return false;
-                }
-
-                if(data.status == 'error'){
-                    $('#error').show();
-                }
-                if(data.status == 'not found'){
-                    $('#tariff-not-found').show();
-                }
-
-                if(data.status == 'success'){
-                    if(data.rate && data.rate.rate ){
-                        $('#error').hide();
-                        $('#tariff-not-found').hide();
-                        $('#tariffing-operator').text(data.rate.destination);
-                        $('#tariffing-rate').text(data.rate.rate + ' \u20ac/min');
-                        $('#tariffing-result').show();
-                        tariffsCache[value] = data.rate;
-                    }else{
-                        clearTariffingResult();
-                    }
-                }
-                else{
-                    clearTariffingResult();
-                }
-            },
-            error:function(data){
-                clearTariffingResult();
-            }
-        });
-        event.preventDefault();
-    })
-/**********END send code country**************/
+/***********END owl-carousel*************/
 
 });

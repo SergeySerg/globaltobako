@@ -16,6 +16,7 @@ return [
 	'questions' => 'Ваші питання та пропозиції',
 	'our_contacts' => 'Наші контакти',
 	'send' => 'Відправити',
+	'more' => 'Більше про нас',
 
 
 	/* Script Contact*/

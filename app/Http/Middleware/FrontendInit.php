@@ -61,9 +61,9 @@ class FrontendInit {
 				->activearticles()
 				->get();
 			// validate count for change method (get() or first()) if one item in array
-			if(count($category_item) == 1){
+			/*if(count($category_item) == 1){
 				$category_item = $category_item->first();
-			}
+			}*/
 			//share Article
 			view()->share($category->link, $category_item);
 		}
