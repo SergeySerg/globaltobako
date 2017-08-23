@@ -20,57 +20,58 @@
 	<meta name="description" content="@if(isset($static_page)) {{ $static_page->getTranslate('meta_description') }} @elseif(isset($seo)){{ $seo->getTranslate('meta_description') }}@endif">
 	<meta name="keywords" content="@if(isset($static_page)) {{ $static_page->getTranslate('meta_keywords') }} @elseif(isset($seo)) {{ $seo->getTranslate('meta_keywords') }}@endif">
 
-
-
 	<link rel="shortcut icon" href="{{ asset('/img/favicon/favicon.ico') }}" type="image/x-icon">
 	<link rel="apple-touch-icon" href="{{ asset('/img/favicon/apple-touch-icon.png') }}">
 	<link rel="apple-touch-icon" sizes="72x72" href="{{ asset('img/favicon/apple-touch-icon-72x72.png') }}">
 	<link rel="apple-touch-icon" sizes="114x114" href="{{ asset('/img/favicon/apple-touch-icon-114x114.png') }}">
 
-	<link href="{{ asset('/css/frontend/style_one.min.css') }}" rel="stylesheet" type="text/css" media="all">
-	<link href="{{ asset('/css/frontend/style_two.min.css') }}" rel="stylesheet" type="text/css" media="all" />
-	<link href="{{ asset('/css/frontend/style_three.min.css') }}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{{ asset('/css/frontend/theme.css') }}" rel="stylesheet" type="text/css" media="all">
+	<link href="{{ asset('/css/frontend/form_two.css') }}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{{ asset('/css/frontend/form.css') }}" rel="stylesheet" type="text/css" media="all" />
 	<link type="text/css" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" media="all" />
+	<link href="{{ asset('/libs/owl.carousel.css') }}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{{ asset('/libs/owl.theme.css') }}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{{ asset('/css/frontend/main.css') }}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{{ asset('/css/plugins/sweetalert.css') }}" rel="stylesheet">
 
 	<!-- HTML5 element support for IE6-8 -->
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 
-	<link href="{{ asset('/css/plugins/sweetalert.css') }}" rel="stylesheet">
-
+	<script src="{{ asset('/js/frontend/jquery.js') }}"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+	<script src="{{ asset('/js/frontend/common.js') }}"></script>
+	<script src="{{ asset('/js/frontend/modernizr.js') }}"></script>
+	<script>jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"pl\/","ajaxPageState":{"theme":"global_tobacco","theme_token":"aVJELFg5m-MYbw7WFxJEzGZ8z18ftdfxGxuvQu0NK5o","js":{"sites\/all\/themes\/bootstrap\/js\/bootstrap.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/jquery\/1.10\/jquery.min.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"\/\/netdna.bootstrapcdn.com\/bootstrap\/3.0.2\/js\/bootstrap.min.js":1,"misc\/textarea.js":1,"sites\/all\/modules\/contrib\/webform\/js\/webform.js":1,"sites\/all\/themes\/global_tobacco\/javascripts\/page-scroll-effects\/js\/modernizr.js":1,"sites\/all\/themes\/global_tobacco\/javascripts\/page-scroll-effects\/js\/velocity.min.js":1,"sites\/all\/themes\/global_tobacco\/javascripts\/page-scroll-effects\/js\/velocity.ui.min.js":1,"sites\/all\/themes\/global_tobacco\/javascripts\/page-scroll-effects\/js\/main.js":1,"sites\/all\/themes\/global_tobacco\/javascripts\/global_tobacco.lib.min.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/field\/theme\/field.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/contrib\/webform\/css\/webform.css":1,"modules\/locale\/locale.css":1,"\/\/netdna.bootstrapcdn.com\/bootstrap\/3.0.2\/css\/bootstrap.min.css":1,"sites\/all\/themes\/bootstrap\/css\/overrides.css":1,"sites\/all\/themes\/global_tobacco\/css\/global_tobacco.min.css":1}},"urlIsAjaxTrusted":{"\/pl\/node\/1":true},"bootstrap":{"anchorsFix":"1","anchorsSmoothScrolling":"1","popoverEnabled":"1","popoverOptions":{"animation":1,"html":0,"placement":"right","selector":"","trigger":"click","title":"","content":"","delay":0,"container":"body"},"tooltipEnabled":"1","tooltipOptions":{"animation":1,"html":0,"placement":"auto left","selector":"","trigger":"hover focus","delay":0,"container":"body"}}});</script>
 
 </head>
 <body class="html front not-logged-in one-sidebar sidebar-first page-node i18n-pl" >
+	<div id="skip-link">
+		<a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+	</div>
+	<div class="wrapper">
+		<header>
+			<h1 class="logo">
+				<a href="/pl" title="Home" rel="home"><span>Global</span><span> Tobacco</span></a>
+			</h1>
+			<div class="language-switcher">
+				<section id="block-locale-language" class="block block-locale clearfix">
+					<ul class="language-switcher-locale-url">
 
-<div id="skip-link">
-	<a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
-</div>
+						@foreach($langs as $lang)
+							<li class="{{ $lang->lang }}@if(App::getLocale() == $lang->lang)active @endif"><a href="{{str_replace(url(App::getLocale()), url($lang->lang), Request::url())}}">{{$lang->lang}}</a></li>
+						@endforeach
 
-<div class="wrapper">
+					</ul>
+				</section>
+			</div>
+		</header>
 
-	<header>
-		<h1 class="logo">
-			<a href="/pl" title="Home" rel="home"><span>Global</span><span> Tobacco</span></a>
-		</h1>
-		<div class="language-switcher">
-			<section id="block-locale-language" class="block block-locale clearfix">
-				<ul class="language-switcher-locale-url">
-					@foreach($langs as $lang)
-						<li class="{{ $lang->lang }}@if(App::getLocale() == $lang->lang)active @endif"><a href="{{str_replace(url(App::getLocale()), url($lang->lang), Request::url())}}">{{$lang->lang}}</a></li>
-					@endforeach
-				</ul>
-			</section>
-		</div>
-	</header>
+			@yield('content')
 
-
-		@yield('content')
-
-	<footer>
-	</footer>
-
-
+		<footer></footer>
+	</div>
 
 {{--Файл переводов--}}
 	<script>
@@ -83,12 +84,10 @@
 {{-- JS --}}
 
 	<script src="{{ asset('/js/plugins/sweetalert.min.js') }}"></script>
-	<script src="{{ asset('/js/frontend/jquery.js') }}"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-	<script src="{{ asset('/js/frontend/js_one.js') }}"></script>
-	<script src="{{ asset('/js/frontend/modernizr.js') }}"></script>
+	<script src="{{ asset('/js/frontend/bootstrap.js') }}"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYcm7rpoj87BtQPk8Q4TjddJQxcLx71mk"></script>
 	<script src="{{ asset('/js/frontend/jquery.parallax.js') }}"></script>
+	<script src="{{ asset('/libs/owl.carousel.min.js') }}"></script>
 	<script src="{{ asset('/js/frontend/config.js') }}"></script>
 
 {{-- /JS --}}

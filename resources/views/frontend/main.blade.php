@@ -69,6 +69,57 @@
                                     </ul>
                                 </div>
                             </section>
+                            <section class="views-row views-row-4 views-row-even cd-section">
+                                <div id="node-10" class="node r-node node-page clearfix" about="/pl/node/10" typeof="foaf:Document">
+                                    <div class="container">
+                                        <h2 class="block-title product-section-title">Сторінка товарів</h2>
+                                        <div class="owl-carousel">
+                                            <div class="col-md-12">
+                                                <div class="product-item">
+                                                    <div class="product-img">
+                                                        <img src="/img/frontend/item-img.jpg" alt="">
+                                                    </div>
+                                                    <h3 class="block-title">Сигари королівські</h3>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="product-item">
+                                                    <div class="product-img">
+                                                        <img src="/img/frontend/item-img.jpg" alt="">
+                                                    </div>
+                                                    <h3 class="block-title">Сигари королівські</h3>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="product-item">
+                                                    <div class="product-img">
+                                                        <img src="/img/frontend/item-img-2.jpg" alt="">
+                                                    </div>
+                                                    <h3 class="block-title">Сигари королівські</h3>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="product-item">
+                                                    <div class="product-img">
+                                                        <img src="/img/frontend/item-img-1.jpg" alt="">
+                                                    </div>
+                                                    <h3 class="block-title">Сигари королівські</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cd-vertical-nav">
+                                        <a href="#0" class="cd-next">
+                                            <span class="title">Наші контакти</span>
+                                            <span class="icon-down-arrow"></span>
+                                        </a>
+                                    </div>
+                                    <ul class="bg-parallax">
+                                        <li class="bg layer" style="background-image: url(img/frontend/bg-4.jpg);" data-depth="0.1"></li>
+                                        <li class="mask layer" style="background-image: url(img/frontend/letter-mask.svg);" data-depth="0.00"></li>
+                                    </ul>
+                                </div>
+                            </section>
                             <section class="views-row views-row-3 views-row-odd views-row-last cd-section">
                                 <div id="node-1" class="node node-webform node-promoted clearfix" about="/pl/node/1" typeof="sioc:Item foaf:Document">
                                     <div class="container">

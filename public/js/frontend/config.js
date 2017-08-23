@@ -7,6 +7,22 @@
 
         $(document).ready(function () {
 
+          /*********owl-carousel-settings************/
+          $(".owl-carousel").owlCarousel({
+            items : 3,
+            itemsDesktop : [1199,3],
+            itemsDesktopSmall : [980,3],
+            itemsTablet: [768,1],
+            itemsMobile : [479,1],
+            navigation: true,
+            navigationText : ["<span class='icon-down-arrow'></span>","<span class='icon-down-arrow'></span>"],
+            slideSpeed : 800,
+            paginationSpeed : 800,
+            autoPlay: true,
+            loop: true,
+          });
+          /*********END owl-carousel-settings************/
+
           var marker_cur_lang_title = 'РўРћР’ Р“Р»РѕР±Р°Р» РўРѕР±Р°РєРѕ Р†РЅС‚РµСЂРЅРµС€РЅР», Рј. Р›СѓС†СЊРє';
           var current_path = window.location.pathname;
           if (current_path.match("^/en")) {
