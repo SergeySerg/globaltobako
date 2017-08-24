@@ -23,12 +23,12 @@
           });
           /*********END owl-carousel-settings************/
 
-          var marker_cur_lang_title = 'РўРћР’ Р“Р»РѕР±Р°Р» РўРѕР±Р°РєРѕ Р†РЅС‚РµСЂРЅРµС€РЅР», Рј. Р›СѓС†СЊРє';
+          var marker_cur_lang_title = 'ТОВ Глобал Тобако Інтернешнл, Луцьк, Україна';
           var current_path = window.location.pathname;
           if (current_path.match("^/en")) {
             marker_cur_lang_title = 'Global Tobacco International Ltd, Lutsk, Ukraine';
           } else if (current_path.match("^/ru")) {
-            marker_cur_lang_title = 'РћРћРћ Р“Р»РѕР±Р°Р» РўРѕР±Р°РєРѕ РРЅС‚РµСЂРЅРµС€РЅР», Рі. Р›СѓС†Рє, РЈРєСЂР°РёРЅР°';
+            marker_cur_lang_title = 'ООО Глобал Тобако Интернешнл, Луцк, Украина';
           } else if (current_path.match("^/pl")) {
             marker_cur_lang_title = 'Global Tobacco International Ltd, Lutsk, Ukraine';
           } 

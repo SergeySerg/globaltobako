@@ -72,40 +72,18 @@
                             <section class="views-row views-row-4 views-row-even cd-section">
                                 <div id="node-10" class="node r-node node-page clearfix" about="/pl/node/10" typeof="foaf:Document">
                                     <div class="container">
-                                        <h2 class="block-title product-section-title">Сторінка товарів</h2>
+                                        <h2 class="block-title product-section-title">{{ $categories_data['products']->getTranslate('title') }}</h2>
                                         <div class="owl-carousel">
-                                            <div class="col-md-12">
-                                                <div class="product-item">
-                                                    <div class="product-img">
-                                                        <img src="/img/frontend/item-img.jpg" alt="">
+                                            @foreach($products as $product_item)
+                                                <div class="col-md-12">
+                                                    <div class="product-item">
+                                                        <div class="product-img">
+                                                            <img src="{{ $product_item->getAttributeTranslate('Картинка товара') }}" alt="{{ $product_item->getTranslate('title') }}">
+                                                        </div>
+                                                        <h3 class="block-title">{{ $product_item->getTranslate('title') }}</h3>
                                                     </div>
-                                                    <h3 class="block-title">Сигари королівські</h3>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="product-item">
-                                                    <div class="product-img">
-                                                        <img src="/img/frontend/item-img.jpg" alt="">
-                                                    </div>
-                                                    <h3 class="block-title">Сигари королівські</h3>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="product-item">
-                                                    <div class="product-img">
-                                                        <img src="/img/frontend/item-img-2.jpg" alt="">
-                                                    </div>
-                                                    <h3 class="block-title">Сигари королівські</h3>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="product-item">
-                                                    <div class="product-img">
-                                                        <img src="/img/frontend/item-img-1.jpg" alt="">
-                                                    </div>
-                                                    <h3 class="block-title">Сигари королівські</h3>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                     <div class="cd-vertical-nav">
@@ -115,8 +93,8 @@
                                         </a>
                                     </div>
                                     <ul class="bg-parallax">
-                                        <li class="bg layer" style="background-image: url(img/frontend/bg-4.jpg);" data-depth="0.1"></li>
-                                        <li class="mask layer" style="background-image: url(img/frontend/letter-mask.svg);" data-depth="0.00"></li>
+                                        <li class="bg layer" style="background-image: url('{{ asset('img/frontend/bg-4.jpg') }}');" data-depth="0.1"></li>
+                                        <li class="mask layer" style="background-image: url('{{ asset('img/frontend/letter-mask.svg') }}');" data-depth="0.00"></li>
                                     </ul>
                                 </div>
                             </section>
@@ -152,14 +130,14 @@
                                                             <input placeholder="{{ trans('base.name') }}" class="form-control form-text" type="text" id="edit-submitted-name" name="submitted[name]" value="" size="60" maxlength="128" />
                                                         </div>
                                                         <div class="form-item webform-component webform-component-email webform-component--email">
-                                                            <label for="edit-submitted-email">Email </label>
-                                                            <input class="email form-text form-email" placeholder="Email" type="email" id="edit-submitted-email" name="submitted[email]" size="60" />
+                                                            <label for="edit-submitted-email">{{ trans('base.email') }}  </label>
+                                                            <input class="email form-text form-email" placeholder="{{ trans('base.email') }} " type="email" id="edit-submitted-email" name="submitted[email]" size="60" />
                                                         </div>
                                                         <div  class="form-item webform-component webform-component-textarea webform-component--questions-or-suggestions">
                                                             <label for="edit-submitted-questions-or-suggestions">{{ trans('base.questions') }} </label>
                                                             <div class="form-textarea-wrapper resizable">
-                                  <textarea placeholder="{{ trans('base.questions') }}" rows="3" class="form-control form-textarea" id="edit-submitted-questions-or-suggestions" name="submitted[questions_or_suggestions]" cols="60">
-                                  </textarea>
+                                                              <textarea placeholder="{{ trans('base.questions') }}" rows="3" class="form-control form-textarea" id="edit-submitted-questions-or-suggestions" name="submitted[questions_or_suggestions]" cols="60">
+                                                              </textarea>
                                                             </div>
                                                         </div>
                                                         <input type="hidden" name="details[sid]" />
@@ -168,7 +146,7 @@
                                                         <input type="hidden" name="details[finished]" value="0" />
                                                         <input type="hidden" name="form_build_id" value="form-pb8-f90ZvGuvN6x3ndp8pnkGSOyZsGkxyzWWHTQF_i4" />
                                                         <input type="hidden" name="form_id" value="webform_client_form_1" />
-                                                        <button class="webform-submit button-primary j-btn btn btn-primary form-submit" name="op" value="&lt;span class=&quot;help&quot;&gt;Wysłać&lt;/span&gt;" type="submit"><span class="help">Wysłać</span></button>
+                                                        <button class="webform-submit button-primary j-btn btn btn-primary form-submit" name="op" value="&lt;span class=&quot;help&quot;&gt;Wysłać&lt;/span&gt;" type="submit"><span class="help">{{ trans('base.send') }} </span></button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -190,7 +168,7 @@
             </section>
         </div>
         <a href="/pl/rss.xml" class="feed-icon" title="Subscribe to Global Tobacco RSS">
-            <img typeof="foaf:Image" src="/img/frontend/feed.png" width="16" height="16" alt="Subscribe to Global Tobacco RSS" />
+            <img typeof="foaf:Image" src="{{ asset('/img/frontend/feed.png') }}" width="16" height="16" alt="Subscribe to Global Tobacco RSS" />
         </a>
         <div id="sidebar-first" class="column sidebar">
             <div class="section"></div>

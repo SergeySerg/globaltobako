@@ -19,6 +19,7 @@ return [
 	'our_contacts' => 'Наши контакты',
 	'send' => 'Отправить',
 	'more' => 'Больше о нас',
+	'email' => 'E-mail',
 
 	/* Script Contact*/
 	'success_send_contact' => 'Ваша заявка успешно отправлена!',

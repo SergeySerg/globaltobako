@@ -17,6 +17,7 @@ return [
 	'questions' => 'Questions or suggestions',
 	'our_contacts' => 'Our contacts',
 	'send' => 'Send',
+	'email' => 'E-mail',
 	'more' => 'More about us',
 	/* Script Contact*/
 	'success_send_contact' => 'Your application was successfully sent!',

@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Админ.панель</title>
 
-    <link rel="shortcut icon" href="{{ asset('/img/favicon/favicon.png') }}" type="image/x-icon">
-    <link rel="apple-touch-icon" href="{{ asset('/img/favicon/apple-touch-icon.png') }}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('img/favicon/apple-touch-icon-72x72.png') }}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('/img/favicon/apple-touch-icon-114x114.png') }}">
+    <link rel="shortcut icon" href="{{ asset('/img/favicon/favicon.png') }}?1" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{{ asset('/img/favicon/apple-touch-icon.png') }}?1">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('img/favicon/apple-touch-icon-72x72.png') }}?1">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('/img/favicon/apple-touch-icon-114x114.png') }}?1">
 
     <!--basic styles-->
     <link href="{{ asset('/css/backend/bootstrap.min.css') }}" rel="stylesheet">
@@ -80,9 +80,9 @@
 <div class="navbar hidden-print">
     <div class="navbar-inner">
         <div class="container-fluid">
-            <a href="{{ route('admin_dashboard') }}" class="brand">
+            <a href="{{ route('admin_dashboard') }}" class="brand">GLOBAL TOBACCO
                 {{--<i class="icon-leaf"></i>--}}
-               <img style="display: block;position: absolute;margin-top: -3px;" width="105px" src="{{ asset('/img/backend/logo.png') }}" alt="{{$_SERVER['HTTP_HOST']}}" />
+               {{--<img style="display: block;position: absolute;margin-top: -3px;" width="105px" src="{{ asset('/img/backend/logo.png') }}" alt="{{$_SERVER['HTTP_HOST']}}" />--}}
                 {{--<small style="margin-left: 40px;">
                     {{$_SERVER['HTTP_HOST']}}
                 </small>--}}

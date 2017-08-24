@@ -3774,9 +3774,6 @@ header .language-switcher ul.language-switcher-locale-url li.active a {
     max-width: 100%;
     max-height: 300px;
 }
-h2.product-section-title{
-    margin-bottom: 80px;
-}
 .product-name{
 
 }
@@ -3817,8 +3814,9 @@ h3.block-title {
 
 }
 @media (max-width: 1049px){
-    .owl-carousel{
-        margin: 0 0 150px 0;
+    .scroll-wrap section:nth-child(3) .node .container {
+        padding-top: 213px;
+        padding-bottom: 213px;
     }
     h2.product-section-title {
         margin-bottom: 50px;
