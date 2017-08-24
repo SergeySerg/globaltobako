@@ -1,12 +1,7 @@
 @extends('ws-app')
 
 @section('content')
-    <main> <div>
-        @foreach($seo as $seos)
-           {{ $seos->getTranslate('title') }}
-
-        @endforeach
-        </DIV>
+    <main>
         <a id="main-content"></a>
         <div class="tabs"></div>
         <div class="region region-content">
