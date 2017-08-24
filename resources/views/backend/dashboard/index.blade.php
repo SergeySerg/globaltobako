@@ -28,7 +28,9 @@
                     <strong>{{ trans('backend.attention') }}!</strong>
                     {{ trans('backend.section') }}
                     <br>
+{{--
                     {{ trans('backend.template') }} <a href='{{ asset("upload/instructions/instrukcia-sait.doc") }}' download>{{ trans('backend.instruction') }} <i class="icon-book"></i> </a>
+--}}
                 </div>
             </div>
         </div><!--/.span-->

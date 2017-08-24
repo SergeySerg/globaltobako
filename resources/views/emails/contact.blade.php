@@ -15,10 +15,6 @@
 	-moz-box-shadow: 0 1px 2px #d1d1d1;
 	-webkit-box-shadow: 0 1px 2px #d1d1d1;
 	box-shadow: 0 1px 2px #d1d1d1;">
-    <tr >
-        <td colspan="2" style="text-align: center;font-style:italic;">Свяжитесь пожалуйста с нами </td>
-    </tr>
-
     <tr>
         <td style="border-bottom: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0; background: #fafafa;  padding: 7px 17px;">Имя</td>
         <td style="border-bottom: 1px solid #e0e0e0; background: #fafafa;  padding: 7px 17px;">{{ $name }}</td>

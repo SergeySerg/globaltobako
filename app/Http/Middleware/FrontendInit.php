@@ -37,6 +37,7 @@ class FrontendInit {
 		//get all Category
 		$categories = Category::all();
 		$categories_data = [];
+		//dd($categories);
 		foreach($categories as $category){
 			//create arr for categories with type
 			$categories_data[$category->link] = $category;
@@ -63,11 +64,13 @@ class FrontendInit {
 			// validate count for change method (get() or first()) if one item in array
 			/*if(count($category_item) == 1){
 				$category_item = $category_item->first();
+				//dd($category_item);
 			}*/
+			//dd($category_item);
 			//share Article
 			view()->share($category->link, $category_item);
 		}
-
+		//dd($categories_data);
 		//view()->share('static_page', $static_page);
 
 

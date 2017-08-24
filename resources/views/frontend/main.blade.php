@@ -1,7 +1,12 @@
 @extends('ws-app')
 
 @section('content')
-    <main>
+    <main> <div>
+        @foreach($seo as $seos)
+           {{ $seos->getTranslate('title') }}
+
+        @endforeach
+        </DIV>
         <a id="main-content"></a>
         <div class="tabs"></div>
         <div class="region region-content">
@@ -11,6 +16,7 @@
                         <div id="scroll-wrap" class="scroll-wrap" data-hijacking="on" data-animation="none">
                             <section class="views-row views-row-1 views-row-odd views-row-first cd-section visible">
                                 <div id="node-9" class="node node-page clearfix" about="/pl/node/9" typeof="foaf:Document">
+
                                     @foreach($about as $about_item)
                                         <div class="container">
                                             <h2 class="block-title" >{{ $about_item->getTranslate('title') }}</h2>
@@ -71,21 +77,24 @@
                             </section>
                             <section class="views-row views-row-4 views-row-even cd-section">
                                 <div id="node-10" class="node r-node node-page clearfix" about="/pl/node/10" typeof="foaf:Document">
-                                    <div class="container">
-                                        <h2 class="block-title product-section-title">{{ $categories_data['products']->getTranslate('title') }}</h2>
-                                        <div class="owl-carousel">
-                                            @foreach($products as $product_item)
-                                                <div class="col-md-12">
-                                                    <div class="product-item">
-                                                        <div class="product-img">
-                                                            <img src="{{ $product_item->getAttributeTranslate('Картинка товара') }}" alt="{{ $product_item->getTranslate('title') }}">
+                                    @if(isset($products) AND count($products) !== 0 AND $categories_data['products']->active == 1)
+                                        <div class="container">
+                                            <h2 class="block-title product-section-title">{{ $categories_data['products']->getTranslate('title') }}</h2>
+                                            <div class="owl-carousel">
+                                                @foreach($products as $product_item)
+                                                    <div class="col-md-12">
+                                                        <div class="product-item">
+                                                            <div class="product-img">
+                                                                <img src="{{ $product_item->getAttributeTranslate('Картинка товара') }}" alt="{{ $product_item->getTranslate('title') }}">
+                                                            </div>
+                                                            <h3 class="block-title">{{ $product_item->getTranslate('title') }}</h3>
                                                         </div>
-                                                        <h3 class="block-title">{{ $product_item->getTranslate('title') }}</h3>
                                                     </div>
-                                                </div>
-                                            @endforeach
+                                                @endforeach
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
+
                                     <div class="cd-vertical-nav">
                                         <a href="#0" class="cd-next">
                                             <span class="title">Наші контакти</span>
@@ -123,32 +132,50 @@
                                             </div>
                                             <div class="left">
                                                 <h2 class="block-title">{{ trans('base.contacts') }}</h2>
-                                                <form class="webform-client-form webform-client-form-1" action="/pl/node/1" method="post" id="webform-client-form-1" accept-charset="UTF-8">
+                                            {{--<form class="webform-client-form webform-client-form-1" id="callback" method="post" accept-charset="UTF-8">
                                                     <div>
                                                         <div class="form-item webform-component webform-component-textfield webform-component--name">
                                                             <label for="edit-submitted-name">{{ trans('base.name') }} </label>
-                                                            <input placeholder="{{ trans('base.name') }}" class="form-control form-text" type="text" id="edit-submitted-name" name="submitted[name]" value="" size="60" maxlength="128" />
+                                                            <input placeholder="{{ trans('base.name') }}" class="--}}{{--trol form-text" type="te--}}{{--{{--id="edit-submitted-name"--}}{{-- name="name" value="" size="60" maxlength="128" />
                                                         </div>
                                                         <div class="form-item webform-component webform-component-email webform-component--email">
                                                             <label for="edit-submitted-email">{{ trans('base.email') }}  </label>
-                                                            <input class="email form-text form-email" placeholder="{{ trans('base.email') }} " type="email" id="edit-submitted-email" name="submitted[email]" size="60" />
+                                                            <input class="email form-text form-email" placeholder="{{ tr--}}{{--e.email') }} " type="emai--}}{{--{--id="edit-submitted-email"--}}{{-- name="email" size="60" />
                                                         </div>
                                                         <div  class="form-item webform-component webform-component-textarea webform-component--questions-or-suggestions">
                                                             <label for="edit-submitted-questions-or-suggestions">{{ trans('base.questions') }} </label>
                                                             <div class="form-textarea-wrapper resizable">
-                                                              <textarea placeholder="{{ trans('base.questions') }}" rows="3" class="form-control form-textarea" id="edit-submitted-questions-or-suggestions" name="submitted[questions_or_suggestions]" cols="60">
+                                                              <textarea placeholder="{{ trans('base.questions') }}" rows="3"--}}{{--form-control form-textarea" --}}{{--id="edit--}}{{--ed-questions-or-suggestions"--}}{{-- name="text" cols="60">
                                                               </textarea>
                                                             </div>
                                                         </div>
-                                                        <input type="hidden" name="details[sid]" />
-                                                        <input type="hidden" name="details[page_num]" value="1" />
-                                                        <input type="hidden" name="details[page_count]" value="1" />
-                                                        <input type="hidden" name="details[finished]" value="0" />
-                                                        <input type="hidden" name="form_build_id" value="form-pb8-f90ZvGuvN6x3ndp8pnkGSOyZsGkxyzWWHTQF_i4" />
-                                                        <input type="hidden" name="form_id" value="webform_client_form_1" />
-                                                        <button class="webform-submit button-primary j-btn btn btn-primary form-submit" name="op" value="&lt;span class=&quot;help&quot;&gt;Wysłać&lt;/span&gt;" type="submit"><span class="help">{{ trans('base.send') }} </span></button>
+                                                        <input type="hidden" name="_token" value="{{csrf_token()}}"/>
+                                                        <button class="webform-submit button-primary j-btn btn btn-pr--}}{{--rm-submit" id="submit-send" --}}{{--value="&lt;span class=&quo--}}{{--uot;&gt;Wysłać&lt;/span&gt;"--}}{{-- type="submit"><span class="help">{{ trans('base.send') }} </span></button>
+
                                                     </div>
+                                            </form>--}}
+                                                <form action="" id="callback" method="post">
+                                                    <div class="form-item webform-component webform-component-textfield webform-component--name">
+                                                        <label for="edit-submitted-name">{{ trans('base.name') }} </label>
+                                                        <input type="text" name="name" class="validate-required" placeholder="{{ trans('base.name') }}">
+                                                    </div>
+                                                    <div class="form-item webform-component webform-component-email webform-component--email">
+                                                        <label for="edit-submitted-email">{{ trans('base.email') }}  </label>
+                                                        <input type="email" name="email" class="validate-required validate-email" placeholder="E-mail">
+                                                    </div>
+                                                    <div class="form-item webform-component webform-component-textarea webform-component--questions-or-suggestions">
+                                                        <label for="edit-submitted-questions-or-suggestions">{{ trans('base.questions') }} </label>
+                                                        <div class="form-textarea-wrapper resizable">
+                                                            <textarea rows="8" name="text" class="validate-required" placeholder="{{ trans('base.questions') }}"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                        <button id="submit-send" type="submit" class="webform-submit button-primary j-btn btn btn-primary form-submit"><span class="help">{{ trans('base.send') }} </span>
+                                                        </button>
+
+                                                    <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                                                 </form>
+
                                             </div>
                                         </div>
                                     </div>

@@ -14,12 +14,12 @@
 	<meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="alternate" type="application/rss+xml" title="Global Tobacco RSS" href="http://globaltobako.com/pl/rss.xml" />
-	<title>Global Tobacco</title>
+
 {{--
-	<title>	@if(isset($static_page)){{ $static_page->getTranslate('meta_title') }}  @elseif(isset($seo)) {{ $seo->getTranslate('meta_title') }} @endif</title>
-	<meta name="description" content="@if(isset($static_page)) {{ $static_page->getTranslate('meta_description') }} @elseif(isset($seo)){{ $seo->getTranslate('meta_description') }}@endif">
-	<meta name="keywords" content="@if(isset($static_page)) {{ $static_page->getTranslate('meta_keywords') }} @elseif(isset($seo)) {{ $seo->getTranslate('meta_keywords') }}@endif">
+	<title>	@if(count($seo)) {{ $seo[0]->getTranslate('meta_title') }} @else Global Tobacco1 @endif</title>
 --}}
+{{--	<meta name="description" content="@if(isset($seo)){{ $seo{0}->getTranslate('meta_description') }} @else Табачні вироби @endif">
+	<meta name="keywords" content="@if(isset($seo)) {{ $seo{0}->getTranslate('meta_keywords') }} @else Табачні вироби різних сортів @endif">--}}
 	<link rel="shortcut icon" href="{{ asset('/img/favicon/favicon.ico') }}" type="image/x-icon">
 	<link rel="apple-touch-icon" href="{{ asset('/img/favicon/apple-touch-icon.png') }}">
 	<link rel="apple-touch-icon" sizes="72x72" href="{{ asset('img/favicon/apple-touch-icon-72x72.png') }}">
@@ -38,12 +38,12 @@
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
 	<script src="{{ asset('/js/frontend/jquery.js') }}"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-	<script src="{{ asset('/js/frontend/common.js') }}"></script>
+
 	<script src="{{ asset('/js/frontend/modernizr.js') }}"></script>
-	<script>jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"pl\/","ajaxPageState":{"theme":"global_tobacco","theme_token":"aVJELFg5m-MYbw7WFxJEzGZ8z18ftdfxGxuvQu0NK5o","js":{"sites\/all\/themes\/bootstrap\/js\/bootstrap.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/jquery\/1.10\/jquery.min.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"\/\/netdna.bootstrapcdn.com\/bootstrap\/3.0.2\/js\/bootstrap.min.js":1,"misc\/textarea.js":1,"sites\/all\/modules\/contrib\/webform\/js\/webform.js":1,"sites\/all\/themes\/global_tobacco\/javascripts\/page-scroll-effects\/js\/modernizr.js":1,"sites\/all\/themes\/global_tobacco\/javascripts\/page-scroll-effects\/js\/velocity.min.js":1,"sites\/all\/themes\/global_tobacco\/javascripts\/page-scroll-effects\/js\/velocity.ui.min.js":1,"sites\/all\/themes\/global_tobacco\/javascripts\/page-scroll-effects\/js\/main.js":1,"sites\/all\/themes\/global_tobacco\/javascripts\/global_tobacco.lib.min.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/field\/theme\/field.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/contrib\/webform\/css\/webform.css":1,"modules\/locale\/locale.css":1,"\/\/netdna.bootstrapcdn.com\/bootstrap\/3.0.2\/css\/bootstrap.min.css":1,"sites\/all\/themes\/bootstrap\/css\/overrides.css":1,"sites\/all\/themes\/global_tobacco\/css\/global_tobacco.min.css":1}},"urlIsAjaxTrusted":{"\/pl\/node\/1":true},"bootstrap":{"anchorsFix":"1","anchorsSmoothScrolling":"1","popoverEnabled":"1","popoverOptions":{"animation":1,"html":0,"placement":"right","selector":"","trigger":"click","title":"","content":"","delay":0,"container":"body"},"tooltipEnabled":"1","tooltipOptions":{"animation":1,"html":0,"placement":"auto left","selector":"","trigger":"hover focus","delay":0,"container":"body"}}});</script>
 
 </head>
 <body class="html front not-logged-in one-sidebar sidebar-first page-node i18n-pl" >
@@ -89,6 +89,7 @@
 	<script src="{{ asset('/js/frontend/jquery.parallax.js') }}"></script>
 	<script src="{{ asset('/libs/owl.carousel.min.js') }}"></script>
 	<script src="{{ asset('/js/frontend/config.js') }}"></script>
+	<script src="{{ asset('/js/frontend/common.js') }}"></script>
 
 {{-- /JS --}}
 </body>
