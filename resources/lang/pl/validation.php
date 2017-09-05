@@ -114,6 +114,7 @@ return [
 		'possession' => 'Charakterystyka elektronarzędzia',
 		'salary' => 'Korzystne zarobki',
 		'file' => 'Dołączanie pliku podsumowanie',
+		'text' => 'Wasze pytania i propozycje'
 	],
 
 ];

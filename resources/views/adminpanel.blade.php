@@ -108,20 +108,6 @@
                                 {{ trans('backend.go_to_site') }}
                             </a>
                         </li>
-                        <li>
-                            <a target="_blank" data-attribute='update_rate' href="{{ route('update_rate') }}">
-                                <i class="icon-cloud-download"></i>
-                                Обновить тарифы
-                            </a>
-                        </li>
-                        <!--  <li>
-                             <a href="#">
-                                 <i class="icon-user"></i>
-                                 Profile
-                             </a>
-                         </li>
-
-                         <li class="divider"></li>-->
 
                         <li>
                             <a href="{{ url('/adminDa6jo/logout') }}">
