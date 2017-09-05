@@ -9,9 +9,9 @@
 
           /*********owl-carousel-settings************/
           $(".owl-carousel").owlCarousel({
-            items : 3,
-            itemsDesktop : [1199,3],
-            itemsDesktopSmall : [980,3],
+            items : 1,
+            itemsDesktop : [1199,1],
+            itemsDesktopSmall : [980,1],
             itemsTablet: [768,1],
             itemsMobile : [479,1],
             navigation: true,

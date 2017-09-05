@@ -16,6 +16,7 @@ return [
 	'name' => 'Imię i nazwisko',
 	'questions' => 'Wasze pytania i propozycje',
 	'our_contacts' => 'Nasze kontakty',
+	'our_products' => 'Nasze produkty',
 	'send' => 'Wysłać',
 	'email' => 'E-mail',
 	'more' => 'Więcej o nas',

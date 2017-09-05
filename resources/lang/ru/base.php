@@ -20,7 +20,7 @@ return [
 	'send' => 'Отправить',
 	'more' => 'Больше о нас',
 	'email' => 'E-mail',
-
+	'our_products' => 'Наша продукция',
 	/* Script Contact*/
 	'success_send_contact' => 'Ваша заявка успешно отправлена!',
 	'error_send_contact' => 'Возникла ошибка при передачи заявки!',

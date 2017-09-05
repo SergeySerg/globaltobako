@@ -59,7 +59,7 @@
                                     @endforeach
                                     <div class="cd-vertical-nav">
                                         <a href="#0" class="cd-next">
-                                            <span class="title">{{ trans('base.our_contacts') }}</span>
+                                            <span class="title">{{ trans('base.our_products') }}</span>
                                             <span class="icon-down-arrow"></span>
                                         </a>
                                     </div>
@@ -88,7 +88,7 @@
                                     </div>
                                     <div class="cd-vertical-nav">
                                         <a href="#0" class="cd-next">
-                                            <span class="title">Наші контакти</span>
+                                            <span class="title">{{ trans('base.our_contacts') }}</span>
                                             <span class="icon-down-arrow"></span>
                                         </a>
                                     </div>
