@@ -22,10 +22,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <a href="{{ $about_item->getAttributeTranslate('Ссылка на прайсы') }}" class="j-btn download-btn">
-                                                <span class="icon-download-to-folder"></span>
-                                                <span class="help">{{ $about_item->getAttributeTranslate('Текст кнопки') }}</span>
-                                            </a>
                                         </div>
                                     @endforeach
                                     <div class="phone">
