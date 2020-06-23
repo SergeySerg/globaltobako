@@ -1,104 +1,181 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN">
-<html lang="{{ App::getLocale() }}" dir="ltr"
-	  xmlns:content="http://purl.org/rss/1.0/modules/content/"
-	  xmlns:dc="http://purl.org/dc/terms/"
-	  xmlns:foaf="http://xmlns.com/foaf/0.1/"
-	  xmlns:og="http://ogp.me/ns#"
-	  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-	  xmlns:sioc="http://rdfs.org/sioc/ns#"
-	  xmlns:sioct="http://rdfs.org/sioc/types#"
-	  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-	  xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
-<head  profile="http://www.w3.org/1999/xhtml/vocab">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta charset="utf-8">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!DOCTYPE HTML>
+<html lang="{{ App::getLocale() }}>
+<head>
 
-	<title>{{ $texts->get('seo_title') }}</title>
-	<meta name="description" content="{{ $texts->get('seo_description') }}">
-	<meta name="keywords" content="{{ $texts->get('seo_keywords') }}">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0, maximum-scale=1" />
+
+<title>
+	@if($categories_data[$type]->getTranslate('meta_title'))
+		{{ $categories_data[$type]->getTranslate('meta_title') }}
+	@else
+		GLOBAL TOBACCO INTERNATIONAL
+	@endif
+</title>
+<meta name="description" content="@if($categories_data[$type]->getTranslate('meta_description')){{ $categories_data[$type]->getTranslate('meta_description') }} @else Український виробник тютюнових виробів. Компанія започаткована у 2007 році на базі Монастириської тютюнової фабрики.@endif">
+<meta name="keywords" content="@if($categories_data[$type]->getTranslate('meta_keywords')){{ $categories_data[$type]->getTranslate('meta_keywords') }} @else GLOBAL TOBACCO @endif">
+
+
+<link media="all" rel="stylesheet" type="text/css" href="{{ asset('/css/frontend/libs.min.css') }}" />
+<link media="all" rel="stylesheet" type="text/css" href="{{ asset('/css/frontend/styles.css') }}?ver={{ $version }}" />
+
+</head>
 	<link rel="shortcut icon" href="{{ asset('/img/favicon/favicon.ico') }}" type="image/x-icon">
 	<link rel="apple-touch-icon" href="{{ asset('/img/favicon/apple-touch-icon.png') }}">
 	<link rel="apple-touch-icon" sizes="72x72" href="{{ asset('img/favicon/apple-touch-icon-72x72.png') }}">
 	<link rel="apple-touch-icon" sizes="114x114" href="{{ asset('/img/favicon/apple-touch-icon-114x114.png') }}">
 
-	<link href="{{ asset('/css/frontend/theme.css') }}" rel="stylesheet" type="text/css" media="all">
-	<link href="{{ asset('/css/frontend/form_two.css') }}" rel="stylesheet" type="text/css" media="all" />
-	<link href="{{ asset('/css/frontend/form.css') }}" rel="stylesheet" type="text/css" media="all" />
-	<link type="text/css" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" media="all" />
-	<link href="{{ asset('/libs/owl.carousel.css') }}" rel="stylesheet" type="text/css" media="all" />
-	<link href="{{ asset('/libs/owl.theme.css') }}" rel="stylesheet" type="text/css" media="all" />
-	<link href="{{ asset('/css/frontend/main.css') }}" rel="stylesheet" type="text/css" media="all" />
+
 	<link href="{{ asset('/css/plugins/sweetalert.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
 
 </head>
-<body class="html front not-logged-in one-sidebar sidebar-first page-node i18n-pl" >
-	<div id="skip-link">
-		<a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
-	</div>
-	<div class="wrapper">
-		<header>
-			<h1 class="logo">
-				<a href="/{{ App::getLocale() }}" title="Home" rel="home"><span>Global</span><span> Tobacco</span></a>
-			</h1>
-			<div class="language-switcher">
-				<section id="block-locale-language" class="block block-locale clearfix">
-					<ul class="language-switcher-locale-url">
+<body>
 
-						@foreach($langs as $lang)
-							<li class="{{ $lang->lang }}@if(App::getLocale() == $lang->lang) active @endif"><a href="{{str_replace(url(App::getLocale()), url($lang->lang), Request::url())}}">{{$lang->lang}}</a></li>
-						@endforeach
+<div class="total-container">
 
-					</ul>
-				</section>
+@if($type == 'main')
+
+	<!-- .header -->
+	<div class="header">
+
+		<div class="container">
+
+			<div class="header__text">
+				<span class="header__text-fon">{{ $main[0]->getTranslate('title')? $main[0]->getTranslate('title') : 'GLOBAL TOBACCO' }}</span>
+				{!! $main[0]->getTranslate('short_description') ? $main[0]->getTranslate('short_description') : '<h2>GLOBAL TOBACCO</h2><h3>INTERNATIONAL</h3>' !!}
 			</div>
-		</header>
 
-			@yield('content')
+			<div class="header__address">
+				<ul>
+					<li><a href="tel:{{ $texts->get('phone') }}" class="address-phone">{{ $texts->get('phone') }}</a></li>
+					<li><span>{{ $texts->get('address') }}</span></li>
+					<li><a class="address-email" href="mailto:{{ $texts->get('email') }}">{{ $texts->get('email') }}</a></li>
+				</ul>
+			</div>
 
-		<footer></footer>
+			@include('frontend.bottom_header')
+
+		</div>
+
+		<div class="header__more"><span>{{ trans('base.more') }}</span></div>
+
+		<div class="inclined inclined--bottom inclined--colorBeige"></div>
+
+		<div class="mobileMenu">
+			<div class="mobileMenu__cont"></div>
+			<div class="mobileMenu__button">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+
+	</div>
+	<!-- END .header -->
+	@else
+
+	@include('frontend.header')
+
+@endif
+	@yield('content')
+
+	<div class="hFooter"></div>
+
+</div>
+
+<!-- .footer -->
+<footer class="footer">
+
+	<div class="container">
+
+		<div class="container__row">
+
+			<div class="container__col">
+
+				<div class="footer-logo"><a href="/{{ App::getLocale() }}"><img src="/{{ $main[0]->getAttributeTranslate('Логотип') ? $main[0]->getAttributeTranslate('Логотип') : asset("/img/frontend/logo_new.png") }}" alt="logo" /></a></div>
+
+			</div>
+
+			<div class="container__col">
+
+				@include('frontend.menu')
+
+			</div>
+
+			<div class="container__col">
+
+				<ul class="feedback">
+					<li><a href="tel:{{ $texts->get('phone') }}" class="fb-phone">{{ $texts->get('phone') }}</a></li>
+					<li><a class="fb-email" href="mailto:{{ $texts->get('email') }}">{{ $texts->get('email') }}</a></li>
+				</ul>
+
+			</div>
+
+		</div>
+
 	</div>
 
+	<div class="footer-bottom">
+
+		<div class="container">
+
+			<span class="footer-info">2020 © Global Tobacco International</span>
+
+		</div>
+
+	</div>
+
+</footer>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">{{ trans('base.contacts') }}</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form class="contForm" id="callback">
+					<div class="contForm__cont">
+						<div class="contForm__box"><input  required type=text name="name" placeholder="{{ trans('base.name') }}" /></div>
+						<div class="contForm__box"><input type="email" required name="email" placeholder="{{ trans('base.email') }}" /></div>
+						<div class="contForm__box"><textarea required name="text" placeholder="{{ trans('base.text') }}"></textarea></div>
+						<input type="hidden" name="_token" value="{{csrf_token()}}"/>
+						<input type="hidden" name="url" value="/{{ App::getLocale() }}/{{ $type }}"/>
+					</div>
+
+					<button id="submit-send" class="button">{{ trans('base.send') }}</button>
+				</form>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- END .footer -->
 {{--Файл переводов--}}
-	<script>
-		var trans = {
-			'base.success': '{{ trans('base.success_send_contact') }}',
-			'base.error': '{{ trans('base.error_send_contact') }}',
-		};
-	</script>
+<script>
+	var trans = {
+		'base.success': '{{ trans('base.success_send_contact') }}',
+		'base.error': '{{ trans('base.error_send_contact') }}',
+	};
+</script>
 {{--/Файл переводов--}}
 {{-- JS --}}
-	<!-- HTML5 element support for IE6-8 -->
-	<!--[if lt IE 9]>
-	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
-	<script src="{{ asset('/js/frontend/jquery.js') }}"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-
-	<script src="{{ asset('/js/frontend/modernizr.js') }}"></script>
-
-	<script src="{{ asset('/js/plugins/sweetalert.min.js') }}"></script>
-	<script src="{{ asset('/js/frontend/bootstrap.js') }}"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYcm7rpoj87BtQPk8Q4TjddJQxcLx71mk"></script>
-	<script src="{{ asset('/js/frontend/jquery.parallax.js') }}"></script>
-	<script src="{{ asset('/libs/owl.carousel.min.js') }}"></script>
-	<script src="{{ asset('/js/frontend/config.js') }}"></script>
-	<script src="{{ asset('/js/frontend/common.js') }}"></script>
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-105973570-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-	
+<script src="{{ asset('/js/plugins/sweetalert.min.js') }}"></script>
+<script src="{{ asset('/js/frontend/jquery.min.js') }}"></script>
+<script src="{{ asset('/js/frontend/libs.min.js') }}"></script>
+<script src="{{ asset('/js/frontend/main.js') }}"></script>
+{{--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>--}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
 {{-- /JS --}}
+
 </body>
 </html>

@@ -24,7 +24,7 @@
 	<link href="{{ asset('/css/backend/font-awesome-ie7.min.css') }}" rel="stylesheet">
 	<![endif]-->
 	<!--js-->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript" ></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript" ></script>
 	<!--<script src="{{ asset('/js/backend/articles.js') }}"type="text/javascript"></script>
 	<script src="{{ asset('/js/backend/jquery.ui.touch-punch.min.js') }}"type="text/javascript"></script>
 	<script src="{{ asset('/js/backend/jquery-ui-1.10.3.custom.min.js') }}"type="text/javascript"></script>

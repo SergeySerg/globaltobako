@@ -2,4 +2,4 @@
 $db_host = 'localhost';
 $db_username = 'root';
 $db_password = '';
-$db_database = 'globaltobako_db';
+$db_database = 'globaltobako_new_db';

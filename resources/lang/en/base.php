@@ -19,7 +19,14 @@ return [
 	'send' => 'Send',
 	'email' => 'E-mail',
 	'more' => 'More about us',
-	'our_products' => 'Our products',
+	'detale' => 'Read more',
+	'company' => "Company",
+	'directions' => "Production",
+	'order' => "Order",
+	'more_detale' => 'Learn more',
+	"text" => "Message text",
+	'require_field' => "Fill in all the fields",
+
 	/* Script Contact*/
 	'success_send_contact' => 'Your application was successfully sent!',
 	'error_send_contact' => 'An error occurred while submitting the application!',

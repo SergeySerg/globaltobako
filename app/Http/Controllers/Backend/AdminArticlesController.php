@@ -16,8 +16,7 @@ use Illuminate\Support\MessageBag;
 use Storage;
 use Image;
 use League\Flysystem\Config;
-//use Illuminate\Contracts\Routing\ResponseFactory;
-//use Illuminate\Routing\Controller;
+
 
 class AdminArticlesController extends Controller {
 
@@ -28,9 +27,9 @@ class AdminArticlesController extends Controller {
 		$admin_category = Category::where("link","=",$type)->first();
 		$admin_category_parent = $admin_category->category_parent()->first();
 		$admin_category_children = $admin_category->category_children()->get();
-		/*dd($admin_category_parent);*/
 		$admin_articles = $admin_category->articles;
-		return view('backend.articles.list')->with(compact('admin_category','admin_articles','type','admin_category_children','admin_category_parent'));
+		return view('backend.articles.list')
+			->with(compact('admin_category','admin_articles','type','admin_category_children','admin_category_parent'));
 
 	}
 
@@ -38,7 +37,6 @@ class AdminArticlesController extends Controller {
 
 	public function fileoptimize(Request $request, $id)
 	{
-		App::setLocale('ua');
 		if (isset($id)){
 			$articles = [Article::find($id)];
 		}
@@ -69,11 +67,11 @@ class AdminArticlesController extends Controller {
 
 	public function create($type)
 	{
-		$langs = Lang::activelangs()->get();
+		$langs = Lang::all();
 		$admin_category = Category::where("link","=","$type")->first();
 
 		//Get group attributes for article_parent
-		$article_group =  Article::where('category_id',$admin_category['article_parent'])->get();
+		$article_group =  Article::where('category_id',$admin_category['parent_id'])->get();
 
 		//list of base and attributes from Category
 		$fields = json_decode($admin_category->fields);
@@ -94,31 +92,30 @@ class AdminArticlesController extends Controller {
 
 	public function store(Request $request, $type)
 	{
-		$langs = Lang::activelangs()->get();
+		$langs = Lang::all();
 
 		//validation rules
 		foreach($langs as $lang){
 			$this->validate($request, [
-				'title_'.$lang['lang'] => 'required|max:255',
+				'title_'.$lang['lang'] => 'max:255',
 				'img' => 'mimes:jpeg,jpg,png,bmp,gif|max:5000'
 			]);
 		}
-		//$all = $request->all();
+
 		$all = $request->except(['attributes','saved-files-path']);
 
 		// Get current category ID
 		$category = Category::where('link',$type)->first();
 
 		$all['category_id'] = $category->id;
-		//$all['article_id'] = $category->article_parent;
 
-		//add img
 		$article_img = $request->file('img');
 
 		//Create new entry in DB
 		$article = Article::create($all);
-		//dd($article);
+
 		$all = $request->all();
+
 		//add category img and save in file
 		if($article_img){
 			$extension = $article_img->getClientOriginalExtension();
@@ -126,32 +123,24 @@ class AdminArticlesController extends Controller {
 			Storage::put('upload/articles/' .$article->id   .'/main/' . $name_img, file_get_contents($article_img));
 			$all['img'] = 'upload/articles/' .$article->id .'/main/' . $name_img;
 		}
-		//dd($all['attributes']);
+
 		if (isset($all['attributes'])) {
 			$attributes = $all['attributes'];
-			//dd($all['saved-files-path']);
-			//dd($attributes);
-			//Storage::deleteDirectory('upload/articles/' . $article->id . '/img');
 
 			foreach ($attributes  as $key => $attribute ) {
 				if (is_object($attribute) && $attribute){
 					$extension = $attribute->getClientOriginalExtension();
 					$name_img = $article->id . '-' . uniqid()  . '.' . $extension;
-					//dd($extension);
 					Storage::put('upload/articles/' . $article->id . '/img/' . $name_img, file_get_contents($attribute));
 					//$all['img'] = 'upload/articles/' . $article->id . '/main/' . $name_img;
 					$attributes[$key] = 'upload/articles/' . $article->id . '/img/' . $name_img;
-					//dd($attributes);
-					//$all['attributes'] = $attributes;
-
 				}
 				elseif(!$attributes[$key] AND isset($all['saved-files-path']) AND $all['saved-files-path'] AND isset($all['saved-files-path'][$key]) AND $all['saved-files-path'][$key]){
 					$attributes[$key] = $all['saved-files-path'][$key];
 				}
 			}
-			//dd($attributes);
+
 			unset($all['saved-files-path']);
-			//dd($attributes);
 
 			$all['attributes'] = $attributes;
 		}
@@ -161,7 +150,6 @@ class AdminArticlesController extends Controller {
 
 		// Сreate array for multilanguage (example- (ua|ru|en))
 		$all = $this->prepareArticleData($all);
-		//Encode attributes from request
 
 		//update $all after save imgs
 		$article->update($all);
@@ -170,7 +158,7 @@ class AdminArticlesController extends Controller {
 		return response()->json([
 			"status" => 'success',
 			"message" => 'Успешно сохранено',
-			"redirect" => URL::to('/adminDa6jo/articles/'.$type)
+			"redirect" => URL::to('/adminDa6jo/articles/' . $type)
 		]);
 	}
 
@@ -181,29 +169,26 @@ class AdminArticlesController extends Controller {
 		//Создание папки соответсвующие id
 		Storage::makeDirectory('upload/articles/' . $id, '0777', true, true);
 
-		$langs = Lang::activelangs()->get();
-		$admin_article = Article::where("id","=","$id")->first();
+		$langs = Lang::all();
+		$admin_article = Article::where("id", $id)->first();
 
 		//Var article_id
 		$article_id = $admin_article['article_id'];
 
 		//Decode attributes from articles DB
 		$attributes = json_decode($admin_article->attributes, true);
-		//dd($attributes);
-		//$attributes = json_decode($admin_article->attributes);
 
-		$admin_category = Category::where("link","=","$type")->first();
+		$admin_category = Category::where("link", $type)->first();
 
 		//Get group attributes for article_parent
-		$article_group =  Article::where('category_id',$admin_category['article_parent'])->get();
-		//dd($article_group);
+		$article_group =  Article::where('category_id',$admin_category['parent_id'])->get();
 
 		//Decode base and attributes from categories DB
 		$fields = json_decode($admin_category->fields);
-//dd($fields);
+
 		//Decode attributes from categories DB
 		$attributes_fields = $fields->attributes;
-		//dd($attributes_fields);
+
 		return view('backend.articles.edit',[
 			'admin_article'=>$admin_article,
 			'admin_category' => $admin_category,
@@ -221,25 +206,22 @@ class AdminArticlesController extends Controller {
 
 	public function update(Request $request, $type, $id)
 	{
-		$langs = Lang::activelangs()->get();
+		$langs = Lang::all();
 
 		//validation rules
 		foreach($langs as $lang){
 			$this->validate($request, [
-				'title_'.$lang['lang'] => 'required|max:255',
+				'title_'.$lang['lang'] => 'max:255',
 				'img' => 'mimes:jpeg,jpg,png,bmp,gif|max:5000'
 			]);
 		}
+
 		$article = Article::where('id', $id)->first();
 		$article_attributes = json_decode($article->attributes, true);
-		//dd($article_attributes);
-		/*foreach($article_attributes as $article_attribute){
-			$arr = explode("@|;", $article_attribute);
-		}*/
 
 		//create var all for date from request
 		$all = $request->all();
-		//dd($all);
+
 		//add img
 		$article_img = $request->file('img');
 
@@ -289,65 +271,52 @@ class AdminArticlesController extends Controller {
 		}
 		if (isset($all['attributes'])) {
 			$attributes = $all['attributes'];
-			//dd($attributes);
-			//Storage::deleteDirectory("upload/articles/1/img/1-58f53369005cf.png");
-				foreach ($attributes  as $key => $attribute ) {
 
-					if (is_object($attribute) && $attribute){
-						/*Rewrite img*/
-						$key_without_langs = stristr($key, '_', true);
-						if($key_without_langs){
-							$key_data = $article_attributes[$key_without_langs];
-							$lang_data = substr($key, -2);
-							$img_data = explode("@|;", $key_data);
-							foreach($langs as $i => $lang){
-								if($lang->lang == $lang_data AND $img_data[$i]){
-									Storage::delete($img_data[$i]);
-								}
-							}
-							/*if ($lang_data == 'ru') {
-								if ($img_data[0]){
-									Storage::delete($img_data[0]);
-								}
-							}
-							else{
-								if ($img_data[1]){
-									Storage::delete($img_data[1]);
-								}
-							}*/
-						}
-						else{
-							Storage::deleteDirectory('upload/articles/' . $article->id . '/img');
-						}
-						/*Rewrite img*/
-						$extension = $attribute->getClientOriginalExtension();
-						$name_img = $article->id . '-' . uniqid()  . '.' . $extension;
-						//dd($attribute);
-						Storage::put('upload/articles/' . $article->id . '/img/' . $name_img, file_get_contents($attribute));
-						//$all['img'] = 'upload/articles/' . $article->id . '/main/' . $name_img;
-						$attributes[$key] = 'upload/articles/' . $article->id . '/img/' . $name_img;
-						//dd($attributes);
-						//$all['attributes'] = $attributes;
+			foreach ($attributes  as $key => $attribute ) {
 
-					}
-					elseif(!$attributes[$key] AND isset($all['saved-files-path']) AND $all['saved-files-path'] AND isset($all['saved-files-path'][$key]) AND $all['saved-files-path'][$key]){
+				if (is_object($attribute) && $attribute){
+					/*Rewrite img when count lang = conts*/
+					$key_without_langs = stristr($key, '_', true);
+					/*if($key_without_langs){
+                        $key_data = $article_attributes[$key_without_langs];
+                        //dd($key_data);
+                        $lang_data = substr($key, -2);
+                        $img_data = explode("@|;", $key_data);
+                        //dd($img_data);
+                        /*foreach($langs as $i => $lang){
 
-						$attributes[$key] = $all['saved-files-path'][$key];
-					}
+                            if($img_data[$i] && isset($img_data[$i]) && $lang->lang == $lang_data){
+                                dd($img_data[$i]);
+                                Storage::delete($img_data[$i]);
+                            }
+                        }
+                    }
+                    else{
+                        Storage::deleteDirectory('upload/articles/' . $article->id . '/img');
+                    }*/
+
+					/*Rewrite img*/
+					$extension = $attribute->getClientOriginalExtension();
+					$name_img = $article->id . '-' . uniqid()  . '.' . $extension;
+					//dd($name_img);
+					Storage::put('upload/articles/' . $article->id . '/img/' . $name_img, file_get_contents($attribute));
+					$attributes[$key] = 'upload/articles/' . $article->id . '/img/' . $name_img;
+					//dd($attributes[$key]);
 				}
+				elseif(!$attributes[$key] AND isset($all['saved-files-path']) AND $all['saved-files-path'] AND isset($all['saved-files-path'][$key]) AND $all['saved-files-path'][$key]){
+					$attributes[$key] = $all['saved-files-path'][$key];
+				}
+			}
 
 			unset($all['saved-files-path']);
-			//dd($attributes);
 
 			$all['attributes'] = $attributes;
-			//dd($all['attributes']);
 		}
 
 		//Encode attributes from request
 		if (isset($all['attributes'])){
 			$all['attributes'] = json_encode($this->prepareAttributesData($all['attributes']));
 		}
-		//dd($all['attributes']);
 
 		//Encode images from request
 		$all['imgs'] = json_encode($files);
@@ -365,7 +334,7 @@ class AdminArticlesController extends Controller {
 		return response()->json([
 			"status" => 'success',
 			"message" => 'Успешно сохранено',
-			"redirect" => URL::to('/adminDa6jo/articles/'.$type)
+			"redirect" => URL::to('/adminDa6jo/articles/' . $type)
 		]);
 	}
 
@@ -384,20 +353,20 @@ class AdminArticlesController extends Controller {
 		else{
 			return response()->json([
 				"status" => 'error',
-				"message" => 'Виникла помилка при видаленні'
+				"message" => 'Возникла ошибка при удалении'
 			]);
 		}
 	}
+
 	/* Сreate array for multilanguage (example- (ua|ru|en)) */
 	private function prepareArticleData($all){
-		$langs = Lang::activelangs()->get();
+		$langs = Lang::all();
 		$all['title'] = '';
 		$all['short_description'] = '';
 		$all['description'] = '';
 		$all['meta_title'] = '';
 		$all['meta_description'] = '';
 		$all['meta_keywords'] ='';
-
 
 		//Change format DATE
 		if (isset($all['date']))
@@ -430,29 +399,18 @@ class AdminArticlesController extends Controller {
 
 	/* Сreate array for multilanguage (example- (ua|ru|en)) */
 	private function prepareAttributesData($all){
-		$langs = Lang::activelangs()->get();
-		//dd($langs);
+		$langs = Lang::all();
 		$first_lang = $langs->first()['lang'];
-		//dd($first_lang);
 		foreach($all as $key => $value){
 			if(stristr($key, '_'.$first_lang) !== FALSE){
 				$key_without_lang = str_replace("_{$first_lang}", '', $key);
-				//dd($key_without_lang);
-
 				$all[$key_without_lang] = '';
-
-
 				foreach($langs as $lang){
 					$all[$key_without_lang] .= $all[$key_without_lang . "_{$lang['lang']}"] .'@|;';
 					unset($all[$key_without_lang . "_{$lang['lang']}"]);
 				}
-
-
 			}
 		}
-
-
-
 		return $all;
 	}
 }

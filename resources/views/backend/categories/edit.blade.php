@@ -32,12 +32,12 @@
                             </a>
                         </li>
 
-                        <li>
+                       {{-- <li>
                             <a data-toggle="tab" href="#picture3">
                                 <i class="fa fa-file-image-o fa-fw" aria-hidden="true"></i>
                                 {{ trans('backend.img_category') }}
                             </a>
-                        </li>
+                        </li>--}}
 
                         <li>
                             <a data-toggle="tab" href="#active13">
@@ -53,12 +53,12 @@
                             </a>
                         </li>
 
-                        <li>
+                        {{--<li>
                             <a data-toggle="tab" href="#date13">
                                 <i class="fa fa-calendar fa-fw" aria-hidden="true"></i>
                                 {{ trans('backend.date') }}
                             </a>
-                        </li>
+                        </li>--}}
 
                         <li>
                             <a data-toggle="tab" href="#parrent13">
@@ -81,12 +81,12 @@
                             </div>
                         </div>
 
-                        <div id="picture3" class="tab-pane">
+                        {{--<div id="picture3" class="tab-pane">
                             <div class="control-group">
                                 @if(isset($admin_category) && $admin_category->img)
-{{--
+--}}{{--
                                     <label class="control-label">Картинка категорії</label>
---}}
+--}}{{--
                                     <div class="controls" id="show-image" >
                                         <div class="row-fluid">
                                             <div class="span3">
@@ -118,24 +118,24 @@
                                                     <a href="#" data-action="collapse">
                                                         <i class="icon-chevron-up"></i>
                                                     </a>
-                                                    {{-- <a href="#" data-action="close">
+                                                    --}}{{-- <a href="#" data-action="close">
                                                          <i class="icon-remove"></i>
-                                                     </a>--}}
+                                                     </a>--}}{{--
                                                 </span>
                                                     </div>
                                                     <div class="widget-body">
                                                         <div class="widget-main">
-                                                            {{--
+                                                            --}}{{--
                                                              <div class="ace-file-input"><input type="file" name="img" id="id-input-file-2"><label data-title="Choose"><span data-title="No File ..."><i class="icon-upload-alt"></i></span></label><a class="remove" href="#"><i class="icon-remove"></i></a></div>
-                                                            --}}
+                                                            --}}{{--
                                                             <div class="ace-file-input ace-file-multiple">
                                                                 <input name='img' type="file" id="id-input-file-3">
                                                                 <a class="remove" href="#"><i class="icon-remove"></i></a>
                                                             </div>
-                                                            {{--<label>
+                                                            --}}{{--<label>
                                                                 <input type="checkbox" name="file-format" id="id-file-format">
                                                                 <span class="lbl"> Allow only images</span>
-                                                            </label>--}}
+                                                            </label>--}}{{--
                                                         </div>
                                                     </div>
                                                 </div>
@@ -153,24 +153,24 @@
                                                     <a href="#" data-action="collapse">
                                                         <i class="icon-chevron-up"></i>
                                                     </a>
-                                                    {{-- <a href="#" data-action="close">
+                                                    --}}{{-- <a href="#" data-action="close">
                                                          <i class="icon-remove"></i>
-                                                     </a>--}}
+                                                     </a>--}}{{--
                                                 </span>
                                                     </div>
                                                     <div class="widget-body">
                                                         <div class="widget-main">
-                                                            {{--
+                                                            --}}{{--
                                                              <div class="ace-file-input"><input type="file" name="img" id="id-input-file-2"><label data-title="Choose"><span data-title="No File ..."><i class="icon-upload-alt"></i></span></label><a class="remove" href="#"><i class="icon-remove"></i></a></div>
-                                                            --}}
+                                                            --}}{{--
                                                             <div class="ace-file-input ace-file-multiple">
                                                                 <input name='img' type="file" id="id-input-file-3">
                                                                 <a class="remove" href="#"><i class="icon-remove"></i></a>
                                                             </div>
-                                                            {{--<label>
+                                                            --}}{{--<label>
                                                                 <input type="checkbox" name="file-format" id="id-file-format">
                                                                 <span class="lbl"> Allow only images</span>
-                                                            </label>--}}
+                                                            </label>--}}{{--
                                                         </div>
                                                     </div>
                                                 </div>
@@ -179,7 +179,7 @@
                                     </div>
                                 @endif
                             </div>
-                        </div>
+                        </div>--}}
 
                         <div id="active13" class="tab-pane">
                             <div class="control-group">
@@ -212,11 +212,11 @@
                             </div>
                         </div>
 
-                        <div id="date13" class="tab-pane">
+                        {{--<div id="date13" class="tab-pane">
                             <div class="control-group">
-{{--
+--}}{{--
                                 <label class="control-label" for="id-date-picker-1">Дата</label>
---}}
+--}}{{--
                                 <div class="controls">
                                     <div class="row-fluid input-append">
                                         <input class="span2 date-picker" name="date" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy" @if(isset($admin_category)) value='{{date('d-m-Y',strtotime($admin_category->date))}}' @endif/>
@@ -226,7 +226,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--}}
 
                         <div id="parrent13" class="tab-pane">
                             <div class="control-group">
@@ -281,7 +281,7 @@
                                         </div>
                                     </div>
 
-                                    <h4 class="header blue clearfix">{{ trans('backend.short_description_category') }}</h4>
+                                    {{--<h4 class="header blue clearfix">{{ trans('backend.short_description_category') }}</h4>
                                     <div class="control-group">
                                         <textarea name="short_description_{{$lang->lang}}"class="span12" id="form-field-8" placeholder="{{ trans('backend.short_description_category') }}">@if(isset($admin_category)){{ $admin_category->getTranslate('short_description',$lang->lang) }}@endif</textarea>
                                     </div>
@@ -289,7 +289,7 @@
                                     <h4 class="header blue clearfix">{{ trans('backend.description_category') }}</h4>
                                     <div class="control-group">
                                         <textarea name="description_{{$lang->lang}}"class="span12" id="form-field-8" placeholder="{{ trans('backend.description_category') }}">@if(isset($admin_category)){{ $admin_category->getTranslate('description',$lang->lang) }}@endif</textarea>
-                                    </div>
+                                    </div>--}}
 
                                     <h4 class="header blue clearfix">SEO</h4>
 
@@ -318,7 +318,7 @@
 
                             @endforeach
 
-                            @if(isset($admin_category))
+                            {{--@if(isset($admin_category))
                                 <h4 class="header green clearfix">
                                     Gallery
                                 </h4>
@@ -339,7 +339,7 @@
                                     {{ trans('backend.form_gallery') }}
                                     <br>
                                 </div>
-                            @endif
+                            @endif--}}
 
                         </div>
                     </div>
@@ -389,7 +389,7 @@
                         </select>
                     </div>
                 </div>--}}
-                <div class="hr hr-18 dotted hr-double"></div>
+                {{--<div class="hr hr-18 dotted hr-double"></div>
                 <h4 class="pink">
                     <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
                     <a href="#modal-table" role="button" id="base" class="green" data-toggle="modal"> {{ trans('backend.base_attr') }} </a>
@@ -401,7 +401,7 @@
                     <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
                     <a href="#modal-table-attributes" role="button" class="green" data-toggle="modal"> {{ trans('backend.attributes') }} </a>
                 </h4>
-                <div class="hr hr-18 dotted hr-double"></div>
+                <div class="hr hr-18 dotted hr-double"></div>--}}
                 <input type="hidden" id="fields" name="fields" @if(isset($admin_category->fields)) value='{{ $admin_category->fields }}'@else value="" @endif/>
                 <input type="hidden" name="img_status" value= 'true'/>
                 <input type="hidden" name="_token" value="{{csrf_token()}}"/>

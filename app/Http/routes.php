@@ -95,14 +95,12 @@ Route::group(['prefix'=>'adminDa6jo', 'middleware' => ['auth', 'backend.init']],
 /*Frontend group routes*/
 Route::group(['middleware' => 'frontend.init'], function(){
 	/*Callback group route*/
-	Route::post('/{lang}', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи
+	Route::post('/{lang}/{type}', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи
 	Route::get('/{lang}/{type?}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index']);
 	Route::get('/{lang}/{type}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show']);
-	Route::post('/{lang}/rate', ['uses' => 'Frontend\ArticleController@rate','as' => 'rate']);//Обработчик тарифа
 
-	Route::get('/{lang}/payment', 'Frontend\PaymentController@index'); // Форма пополнения
-	Route::post('/{lang}/payment/send', 'Frontend\PaymentController@send'); // Пополнение
-	Route::post('/{lang}/payment/vat', 'Frontend\PaymentController@vat'); // Пополнение
+
+
 
 });
 /*Frontend group routes*/

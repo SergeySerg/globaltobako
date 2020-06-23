@@ -11,14 +11,21 @@ return [
 	| the simple pagination links. You are free to change them to anything
 	| you want to customize your views to better match your application.
 	|
-	*/'contacts' => 'Зв\'яжіться з нами',
-	'name' => 'Ваше ім\'я',
+	*/'contacts' => 'Зв\'язатися з нами',
+	'name' => 'Ім\'я',
 	'questions' => 'Ваші питання та пропозиції',
 	'our_contacts' => 'Наші контакти',
 	'send' => 'Відправити',
 	'more' => 'Більше про нас',
 	'email' => 'E-mail',
-	'our_products' => 'Наша продукція',
+	'detale' => 'Детальніше',
+	'company' => "Компанії",
+	'directions' => "Виробництва",
+	'order' => "Замовити",
+	'more_detale' => 'Дізнатись більше',
+	"text" => "Текст повідомлення",
+	'require_field' => "Заповніть усі поля",
+
 
 	/* Script Contact*/
 	'success_send_contact' => 'Ваша заявка успішно відправлена!',

@@ -45,7 +45,7 @@
                 <form class="form-horizontal" id="resource-form" method="POST" action="" />
                     @if(isset($attributes_fields))
                         @foreach($attributes_fields as $key => $attribute)
-                            @if(!$attribute->lang_active)
+                            @if(isset($attribute)  AND !$attribute->lang_active)
                                 @if($attribute->type == 'input' )
                                     <div class="control-group">
                                         <label class="control-label" for="form-field-2">{{ $key }}</label>
@@ -369,7 +369,7 @@
 
                                         @if(isset($attributes_fields))
                                             @foreach($attributes_fields as $key => $attribute)
-                                               @if(isset($attribute) AND ($attribute->lang_active))
+                                               @if(isset($attribute) AND $attribute AND ($attribute->lang_active))
                                                     @if($attribute->type == 'input' )
                                                         <div class="control-group">
                                                             <label class="control-label" for="form-field-2">{{ $key }}</label>
@@ -388,7 +388,7 @@
                                                         <div class="control-group">
                                                             <textarea name='attributes[{{ $key }}_{{$lang->lang}}]' class="span12 no-wysiwyg" id="form-field-{{ $key }}" placeholder="Текст">{{ $admin_article->getAttributeTranslate($key, $lang->lang) }}</textarea>
                                                         </div>
-                                                    @elseif ($attribute->type == 'files' )
+                                                    @elseif (isset($attribute) AND$attribute->type == 'files' )
                                                         <div class="control-group">
                                                             <label class="control-label" for="id-date-picker-1">{{ $key }}</label>
                                                             @if(isset($admin_article) && $admin_article->getAttributeTranslate($key, $lang->lang))

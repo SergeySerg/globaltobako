@@ -35,13 +35,13 @@
 
     <!--basic scripts-->
     <!--js-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript" ></script>
 
 
     <!--fonts-->
 
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" type='text/css' />
-    <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
     <!--ace styles-->
     <link href="{{ asset('/css/backend/ace.min.css') }}" rel="stylesheet">
@@ -165,6 +165,11 @@
                             </a>
 
                             <ul class="submenu">
+                                <li>
+                                    <a href="{{ $url }}/articles/{{ $admin_category->link }}" @if($admin_category->active == 0) style="color:#e4e1e1" @endif >
+                                        {{ $admin_category->getTranslate('title') }}
+                                    </a>
+                                </li>
                                 @foreach($admin_category->category_children as $admin_category_children)
                                 <li @if(Request::is('*/'.$admin_category_children->link.'') || Request::is('*/'.$admin_category_children->link.'/*')) class="active" @endif>
                                     <a href="{{ $url }}/articles/{{ $admin_category_children->link }}" @if($admin_category_children->active == 0) style="color:#e4e1e1" @endif>
@@ -176,48 +181,6 @@
 
                         </li>
 
-                        {{--<li>
-                            <a href="#" class="dropdown-toggle">
-                                <i class="icon-double-angle-right"></i>
-
-                                Three Level Menu
-                                <b class="arrow icon-angle-down"></b>
-                            </a>
-
-                            <ul class="submenu">
-                                <li>
-                                    <a href="#">
-                                        <i class="icon-leaf"></i>
-                                        Item #1
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" class="dropdown-toggle">
-                                        <i class="icon-pencil"></i>
-
-                                        4th level
-                                        <b class="arrow icon-angle-down"></b>
-                                    </a>
-
-                                    <ul class="submenu">
-                                        <li>
-                                            <a href="#">
-                                                <i class="icon-plus"></i>
-                                                Add Product
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#">
-                                                <i class="icon-eye-open"></i>
-                                                View Products
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>--}}
                     @endforeach
                     @if( (Auth::user()->name) == 'root' )
                         <li>
